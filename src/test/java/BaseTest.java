@@ -23,17 +23,18 @@ public class BaseTest {
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));//5 seconds or 10 seconds?
     }
-
-    @AfterMethod
-    public void tearDown() {
-        driver.quit();
-    }
-
     @BeforeMethod
     public void setupPage() {
         String url = "https://qa.koel.app/";
         driver.get(url);
         Assert.assertEquals(driver.getCurrentUrl(), url);
     }
+
+    @AfterMethod
+    public void tearDown() {
+        driver.quit();
+    }
+
+
 
 }
