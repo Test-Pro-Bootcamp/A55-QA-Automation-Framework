@@ -9,26 +9,20 @@ public class Homework_AddToPlaylist extends BaseTest{
     public void addSongToPlaylist() throws InterruptedException {
         //Completed Steps 1 and 2, to initialize the "chrome driver" and to navigate to the url "https://qa.koel.app/"
         //Step3: create an email field variable and input your email id
-        WebElement emailField = driver.findElement(By.cssSelector("[type=\"email\"]"));
-        emailField.sendKeys("nayana.rao.subramanya@testpro.io");
+        enterEmail();
 
         //Step4: create a password field variable and input your password
-        WebElement passwordField = driver.findElement(By.cssSelector("[type=\"password\"]"));
-        passwordField.sendKeys("Zqmvyk4hDaZ3vga");
+        enterPassword();
 
         //Step5: create a Login button variable and click it
-        WebElement logInButton = driver.findElement(By.cssSelector("[type=\"submit\"]"));
-        logInButton.click();
-        Thread.sleep(1000);
+        loginButton();
 
-        /*Step6: verify that the homepage has been opened
-        String homeURL = "https://qa.koel.app/#!/home";
-        Assert.assertEquals(driver.getCurrentUrl(), homeURL);*/
+        //Step6: verify that the homepage has been opened
+        WebElement mostPlayedList = driver.findElement(By.cssSelector("[class=\"top-song-list\"]"));
+        Assert.assertTrue(mostPlayedList.isDisplayed());
 
         //Step7: navigate to the search field and input a song name
-        WebElement searchField = driver.findElement(By.cssSelector("[type=\"search\"]"));
-        searchField.clear();
-        searchField.sendKeys("Tunnel of Lights (ID 1689)");
+        searchFieldAccess();
 
         //Step8: click the view all button to display the search results
         WebElement viewAllButton = driver.findElement(By.xpath("//div[@class='results']//h1/button"));
@@ -59,13 +53,10 @@ public class Homework_AddToPlaylist extends BaseTest{
         Thread.sleep(4500);
 
         //Step13: a method to create a new playlist and add the song to it.
-        WebElement homePage = driver.findElement(By.cssSelector("[href=\"#!/home\"]"));
-        homePage.click();
-        WebElement searchField1 = driver.findElement(By.cssSelector("[type=\"search\"]"));
-        searchField1.click();
-        searchField1.clear();
-
-        searchField1.sendKeys("Dee");
+        goHome();
+        WebElement searchField = driver.findElement(By.cssSelector("[type='search']"));
+        searchField.clear();
+        searchFieldAccess();
 
         viewAllButton.click();
         WebElement firstSongInList = driver.findElement(By.xpath("//*[@id='songResultsWrapper']//table/tr[1]/td[2]"));

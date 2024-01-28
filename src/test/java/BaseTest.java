@@ -1,5 +1,7 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
@@ -35,6 +37,30 @@ public class BaseTest {
         driver.quit();
     }
 
+    public void enterEmail(){
+        WebElement emailField = driver.findElement(By.cssSelector("[type=\"email\"]"));
+        emailField.sendKeys("nayana.rao.subramanya@testpro.io");
+    }
 
+    public void enterPassword(){
+        WebElement passwordField = driver.findElement(By.cssSelector("[type=\"password\"]"));
+        passwordField.sendKeys("Zqmvyk4hDaZ3vga");
+    }
 
+    public void loginButton() throws InterruptedException {
+        WebElement logInButton = driver.findElement(By.cssSelector("[type=\"submit\"]"));
+        logInButton.click();
+        Thread.sleep(1000);
+    }
+
+    public void searchFieldAccess(){
+        WebElement searchField = driver.findElement(By.cssSelector("[type=\"search\"]"));
+        searchField.clear();
+        searchField.sendKeys("Tunnel of Lights (ID 1689)");
+    }
+
+    public void goHome(){
+        WebElement homePage = driver.findElement(By.cssSelector("[href=\"#!/home\"]"));
+        homePage.click();
+    }
 }
