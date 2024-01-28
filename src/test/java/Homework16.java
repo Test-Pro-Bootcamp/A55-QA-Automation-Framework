@@ -3,6 +3,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
@@ -10,7 +11,7 @@ import java.time.Duration;
 
 public class Homework16 extends BaseTest{
     @Test
-    public void registrationNavigation (){
+    public void registrationNavigation () throws InterruptedException {
         //preconditions
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
@@ -25,10 +26,10 @@ public class Homework16 extends BaseTest{
         driver.get(url);
         WebElement registrationBtn = driver.findElement(By.cssSelector("a[href='registration']"));
         registrationBtn.click();
+        Thread.sleep(2000);
         String url2 = "https://qa.koel.app/registration";
-        WebElement Notification = driver.findElement(By.cssSelector("span[class='small']"));
-        //Assert.assertEquals(driver.getCurrentUrl(),url2);//
-        driver.get(url);
+        Assert.assertEquals(driver.getCurrentUrl(),url2);
+        driver.quit();
 
     }
 
