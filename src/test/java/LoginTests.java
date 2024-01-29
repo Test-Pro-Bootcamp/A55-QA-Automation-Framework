@@ -1,5 +1,4 @@
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -33,7 +32,7 @@ public class LoginTests extends BaseTest {
         //declare web driver
         WebDriver driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        String url = "https://qa.koel.app/";
+        String url = "https://testpro.io/";
         driver.get(url);
         WebElement emailField = driver.findElement(By.cssSelector("input[type='email']"));
         emailField.clear();//
