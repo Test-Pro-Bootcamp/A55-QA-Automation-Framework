@@ -17,8 +17,13 @@ public class Homework16 extends BaseTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
         String url="https://qa.koel.app/";
         driver.get(url);
-        WebElement emailField = driver.findElement(By.cssSelector("[type='email']"));
-        Assert.assertTrue(emailField.isDisplayed());
+
+        WebElement registrationLink = driver.findElement(By.cssSelector("[href=registration]"));
+        registrationLink.click();
+
+        String registrationUrl = "https://qa.koel.app/registration";
+        Assert.assertEquals(driver.getCurrentUrl(),registrationUrl);
+
         driver.quit();
     }
 
