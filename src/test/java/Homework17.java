@@ -7,7 +7,9 @@ public class Homework17 extends BaseTest {
 
     @Test
     public void addSongPlayList() throws InterruptedException {
-        String expectedSongAddedSuccessMessage = "Added 1 song into";
+        String namePlaylist= "Green Song";
+        String expectedSongAddedSuccessMessage = "Added 1 song into \"" + namePlaylist + ".\"";
+        String song = "Epic Songs";
         navigateToPage();
         provideEmail("kaflimeerim@gmail.com");
         providePassword("te$t$tudent");
@@ -27,7 +29,7 @@ public class Homework17 extends BaseTest {
 
     }
     public String getSongAddedSuccessMessage(){
-        WebElement notification = driver.findElement(By.xpath("//div[contains(text(),'Added 1 song into')]"));
+        WebElement notification = driver.findElement(By.xpath("//div[text()='Added 1 song into 'Green song."));
         return notification.getText();
 
     }
@@ -62,8 +64,6 @@ public class Homework17 extends BaseTest {
 
 
     }
-
-
 
 
 
