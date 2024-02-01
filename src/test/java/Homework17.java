@@ -18,6 +18,7 @@ public class Homework17 extends BaseTest {
         clickAddTo();
         Assert.assertTrue(successPopOutMessage());
     }
+
     @Test
     public void enterSongToSearchBar() throws InterruptedException {
             WebElement SearchField = driver.findElement(By.cssSelector("input[type='search']"));
