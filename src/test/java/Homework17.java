@@ -68,16 +68,17 @@ public class Homework17 extends BaseTest {
         Thread.sleep(2000);
     }
 
-    //@Test
-    //public boolean SuccessPopOutMessage(){
-
-        //WebElement PopOut = driver.findElement(By.cssSelector("//div[@class='success show']"));
+    @Test
+    public boolean SuccessPopOutMessage(){
+        WebElement PopOut = driver.findElement(By.cssSelector("//div[@class='success show']"));
+        Assert.assertTrue(PopOut.isDisplayed());
         //String expectedText = "Added 1 song to test1";
         //String actualText = driver.getText();
         //Assert.assertEquals(expectedText, actualText);
         //return PopOut.isDisplayed();
 
-    //}
+        return PopOut.isDisplayed();
+    }
 
 
 }
