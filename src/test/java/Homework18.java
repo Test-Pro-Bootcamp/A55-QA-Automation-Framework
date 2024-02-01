@@ -7,14 +7,15 @@ public class Homework18 extends BaseTest{
 
     @Test
     public void playSong(){
+        //Given valid Cred
         provideEmail("taqimed99@gmail.com");
         providePassword("Med-20115-010499@");
         clickBtn();
-        WebElement avatarIcon = driver.findElement(By.cssSelector("img.avatar"));
-        Assert.assertTrue(avatarIcon.isDisplayed());
+        //WHEN I click Play
         playNextSongBtn();
         clickPlayBtn();
-        songIsPlaying();
+        //THEN
+        Assert.assertTrue(songIsPlaying());
     }
 
     private boolean songIsPlaying() {
