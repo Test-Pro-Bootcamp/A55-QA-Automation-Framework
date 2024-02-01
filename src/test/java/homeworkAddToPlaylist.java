@@ -4,7 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.openqa.selenium.Keys;
 
-public class Homework_AddToPlaylist extends BaseTest{
+public class homeworkAddToPlaylist extends BaseTest{
     @Test
     public void addSongToPlaylist() throws InterruptedException {
         //Completed Steps 1 and 2, to initialize the "chrome driver" and to navigate to the url "https://qa.koel.app/"
