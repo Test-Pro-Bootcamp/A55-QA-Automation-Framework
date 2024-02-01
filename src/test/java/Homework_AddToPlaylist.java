@@ -50,8 +50,6 @@ public class Homework_AddToPlaylist extends BaseTest{
         String successfulAddSongMessage = "Added 1 song into \"My Music.\"";
         WebElement messageSuccess = driver.findElement(By.cssSelector("[class=\"success show\"]"));
         Assert.assertEquals(messageSuccess.getText() ,successfulAddSongMessage);
-        Thread.sleep(4500);
-
         }
 
         @Test
@@ -78,11 +76,11 @@ public class Homework_AddToPlaylist extends BaseTest{
             viewAllButton.click();
 
             //Step9: create a variable for the first song in the result displayed
-            WebElement firstSong = driver.findElement(By.xpath("//section[@id='songResultsWrapper']//div/table"));
+            WebElement firstSong = driver.findElement(By.xpath("//section[@id='songResultsWrapper']//div/table/tr/td[contains(text(),\"sailing day\")]"));
             firstSong.click();
 
         //Step10: Click the add to button
-            WebElement addToButton = driver.findElement(By.cssSelector("[class='btn-add-to']"));
+            WebElement addToButton = driver.findElement(By.cssSelector("[class=\"btn-add-to\"]"));
             addToButton.click();
 
         WebElement playlistField = driver.findElement(By.xpath("//section[@id='songResultsWrapper']//section[@class='new-playlist']/form/input[@required='required']"));
