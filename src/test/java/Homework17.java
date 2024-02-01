@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 public class Homework17 extends BaseTest {
+
     @Test
     public void addSongToPlaylist() throws InterruptedException {
         //navigate to page
