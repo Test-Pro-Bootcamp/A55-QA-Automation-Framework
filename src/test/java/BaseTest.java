@@ -59,6 +59,12 @@ public class BaseTest {
         searchField.sendKeys("Tunnel of Lights (ID 1689)");
     }
 
+    public void searchFieldAccess1(){
+        WebElement searchField = driver.findElement(By.cssSelector("[type=\"search\"]"));
+        searchField.clear();
+        searchField.sendKeys("Dee");
+    }
+
     public void goHome(){
         WebElement homePage = driver.findElement(By.cssSelector("[href=\"#!/home\"]"));
         homePage.click();

@@ -56,7 +56,7 @@ public class Homework_AddToPlaylist extends BaseTest{
         goHome();
         WebElement searchField = driver.findElement(By.cssSelector("[type='search']"));
         searchField.clear();
-        searchFieldAccess();
+        searchFieldAccess1();//Choice of song is now Dee.
 
         viewAllButton.click();
         WebElement firstSongInList = driver.findElement(By.xpath("//*[@id='songResultsWrapper']//table/tr[1]/td[2]"));
