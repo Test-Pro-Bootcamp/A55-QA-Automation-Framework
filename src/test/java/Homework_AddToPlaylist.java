@@ -52,17 +52,38 @@ public class Homework_AddToPlaylist extends BaseTest{
         Assert.assertEquals(messageSuccess.getText() ,successfulAddSongMessage);
         Thread.sleep(4500);
 
-        //Step13: a method to create a new playlist and add the song to it.
-        goHome();
-        WebElement searchField = driver.findElement(By.cssSelector("[type='search']"));
-        searchField.clear();
-        searchFieldAccess1();//Choice of song is now Dee.
+        }
 
-        viewAllButton.click();
-        WebElement firstSongInList = driver.findElement(By.xpath("//*[@id='songResultsWrapper']//table/tr[1]/td[2]"));
-        firstSongInList.click();
-        WebElement addToButtonRepeat = driver.findElement(By.cssSelector("[class='btn-add-to']"));
-        addToButtonRepeat.click();
+        @Test
+
+        public void addSongToNewPlaylist() throws InterruptedException {
+            //Step3: Enter email
+            enterEmail();
+
+            //Step4: input password
+            enterPassword();
+
+            //Step5: click log in button
+            loginButton();
+
+            //Step6: verify that the homepage has been opened
+            WebElement avatar = driver.findElement(By.cssSelector("[class='avatar']"));
+            Assert.assertTrue(avatar.isDisplayed());
+
+            //Step7: navigate to the search field and input a song name
+            searchFieldAccess1();
+
+            //Step8: click the view all button to display the search results
+            WebElement viewAllButton = driver.findElement(By.xpath("//div[@class='results']//h1/button"));
+            viewAllButton.click();
+
+            //Step9: create a variable for the first song in the result displayed
+            WebElement firstSong = driver.findElement(By.xpath("//section[@id='songResultsWrapper']//div/table"));
+            firstSong.click();
+
+        //Step10: Click the add to button
+            WebElement addToButton = driver.findElement(By.cssSelector("[class='btn-add-to']"));
+            addToButton.click();
 
         WebElement playlistField = driver.findElement(By.xpath("//section[@id='songResultsWrapper']//section[@class='new-playlist']/form/input[@required='required']"));
         playlistField.click();
