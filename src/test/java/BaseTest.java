@@ -24,6 +24,7 @@ public class BaseTest {
         options.addArguments("--remote-allow-origins=*"); //Allows the browser to automate the process and gives the required permissions
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));//5 seconds or 10 seconds?
+        driver.manage().window().maximize();
     }
     @BeforeMethod
     public void setupPage() {
@@ -51,6 +52,8 @@ public class BaseTest {
         WebElement logInButton = driver.findElement(By.cssSelector("[type=\"submit\"]"));
         logInButton.click();
         Thread.sleep(1000);
+        WebElement avatardisplayed = driver.findElement(By.cssSelector("[class=\"avatar\"]"));
+        Assert.assertTrue(avatardisplayed.isDisplayed(), "Login Unsuccessful");
     }
 
     public void searchFieldAccess(){

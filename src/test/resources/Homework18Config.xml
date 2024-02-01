@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="TestNG">
+<suite name="Homework18Config">
 
-    <test name="Example Test" preserve-order="false">
+    <test name="Homework18" preserve-order="false">
         <classes>
-            <class name="LoginTests"/>
             <class name="BaseTest"/>
-            <class name="RegistrationTests"/>
-            <class name="homeworkAddToPlaylist"/>
             <class name ="Homework18"/>
         </classes>
     </test>

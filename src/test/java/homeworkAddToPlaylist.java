@@ -34,7 +34,7 @@ public class homeworkAddToPlaylist extends BaseTest{
 
         /*Right Click function for adding to Playlist
         Actions actions = new Actions(driver);
-        WebElement firstSong = driver.findElement(By.xpath("//section[@id='songResultsWrapper']//div/table/tr[1]/td[2]"));
+        WebElement firstSong = driver.findElement(By.xpath("//section[@id='songResultsWrapper']//div/table/tr[1]/td[contains(text(),"Tunnel of")]"));
         actions.contextClick(firstSong).perform();*/
 
         //Step10: Click the add to button
