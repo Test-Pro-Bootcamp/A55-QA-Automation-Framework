@@ -8,14 +8,14 @@ public class Homework17 extends BaseTest {
     @Test
     public void addSongPlayList() throws InterruptedException {
         String namePlaylist= "Green Song";
-        String expectedSongAddedSuccessMessage = "Added 1 song into \"" + namePlaylist + ".\"";
+        String expectedSongAddedSuccessMessage = "Added 1 song into \""+ namePlaylist +".\"";
         String song = "Epic Songs";
         navigateToPage();
         provideEmail("kaflimeerim@gmail.com");
         providePassword("te$t$tudent");
         loginToKoel();
         Thread.sleep(2000);
-        searchSong("Epic Songs");
+        searchSong(song);
         Thread.sleep(2000);
         clickViewAllBtn();
         Thread.sleep(2000);
@@ -24,20 +24,23 @@ public class Homework17 extends BaseTest {
         clickAddToBtn();
         Thread.sleep(2000);
         choosePlaylist();
-        Thread.sleep(5000);
+        Thread.sleep(2000);
         Assert.assertEquals(getSongAddedSuccessMessage(),expectedSongAddedSuccessMessage);
 
     }
     public String getSongAddedSuccessMessage(){
-        WebElement notification = driver.findElement(By.xpath("//div[text()='Added 1 song into 'Green song."));
-        return notification.getText();
+        WebElement notification = driver.findElement(By.cssSelector("div.success.show"));
+       return notification.getText();
 
     }
 
 
-    public void choosePlaylist() {
+    public void choosePlaylist() throws InterruptedException {
         WebElement playlist = driver.findElement(By.xpath("//section[@id='songResultsWrapper']//li[contains(text(),'Green Song')]"));
         playlist.click();
+        Thread.sleep(5000);
+
+        ////section[@id='songResultsWrapper']//li[contains(text(),'Green Song')]
     }
 
     public void clickAddToBtn() {
@@ -57,9 +60,9 @@ public class Homework17 extends BaseTest {
 
     }
 
-    public void searchSong(String songName) {
+    public void searchSong(String song) {
         WebElement searchField = driver.findElement(By.cssSelector("input[type='search']"));
-        searchField.sendKeys(songName);
+        searchField.sendKeys(song);
 
 
 
@@ -68,3 +71,6 @@ public class Homework17 extends BaseTest {
 
 
 }
+
+
+
