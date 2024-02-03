@@ -1,11 +1,48 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class Homework20 extends BaseTest {
-    String DeleteMessage = "Deleted playlist vivo.";
+    String DeleteMessage = "Deleted playlist \"vivo.\"";
+    String createdPlaylist = "Created playlist \"vivo.\"";
+
+    @Test
+    public void createPlaylist(){
+        //Given
+        provideEmail("taqimed99@gmail.com");
+        providePassword("Med-20115-010499@");
+        clickBtn();
+        //When
+        clickPlusButton();
+        chooseNewPlaylist();
+        enterPlaylistName("vivo");
+        Assert.assertEquals(playlistCreated(),createdPlaylist);
+
+    }
+     public String playlistCreated(){
+        WebElement notificationMsg = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
+        return notificationMsg.getText();
+
+     }
+    private void enterPlaylistName(String newPlaylistName) {
+        WebElement playlistNameField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[name='name'] ")));
+        playlistNameField.clear();
+        playlistNameField.sendKeys(newPlaylistName);
+        playlistNameField.sendKeys(Keys.ENTER);
+    }
+
+    private void chooseNewPlaylist() {
+        WebElement newPlaylist = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[data-testid='playlist-context-menu-create-simple']")));
+        newPlaylist.click();
+    }
+
+    private void clickPlusButton() {
+        WebElement clickPlusButton1= wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[data-testid='sidebar-create-playlist-btn']")));
+        clickPlusButton1.click();
+    }
 
     @Test
     public void deletePlaylist() throws InterruptedException {
