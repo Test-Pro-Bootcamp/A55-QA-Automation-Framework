@@ -13,13 +13,15 @@ import org.testng.annotations.Parameters;
 import java.time.Duration;
 
 public class BaseTest {
-WebDriver driver;
-String url;
+    WebDriver driver;
+    String url;
+
     @BeforeSuite
     static void setupClass() {
 
         WebDriverManager.chromedriver().setup();
     }
+
     @BeforeMethod
     @Parameters({"BaseUrl"})
     public void launchBrowser(String BaseUrl) {
