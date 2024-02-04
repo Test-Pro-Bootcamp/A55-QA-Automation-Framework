@@ -1,11 +1,14 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
+import org.testng.annotations.Test;
 
 public class homework20 extends BaseTest{
-    public void deletePlaylist() throws InterruptedException {
-        enterEmail();
-        enterPassword();
+    @Test
+    public void deletePlaylist(){
+        enterEmail("nayana.rao.subramanya@testpro.io");
+        enterPassword("Zqmvyk4hDaZ3vga");
         loginButton();
         ChoosePlaylist();
         deleteThePlaylist();
@@ -14,20 +17,20 @@ public class homework20 extends BaseTest{
 
     private void confirmDeletion() {
         String successMessage = "Deleted playlist \"apple.\"";
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class=\"alertify-logs top right\"]/div[@class=\"success show\"]")));
         WebElement messageSuccess = driver.findElement(By.xpath("//div[@class=\"alertify-logs top right\"]/div[@class=\"success show\"]"));
         Assert.assertEquals(messageSuccess.getText(),successMessage);
     }
 
-    private void deleteThePlaylist() throws InterruptedException {
-        WebElement deleteButton = driver.findElement(By.cssSelector("[title=\"Delete this playlist\"]"));
+    private void deleteThePlaylist() {
+        WebElement deleteButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[title=\"Delete this playlist\"]")));
         deleteButton.click();
         WebElement okayButton = driver.findElement(By.xpath("//div[@class=\"alertify\"]//nav/button[@class=\"ok\"]"));
-        okayButton.click();
-        Thread.sleep(900);
+        wait.until(ExpectedConditions.elementToBeClickable(okayButton)).click();
     }
 
     private void ChoosePlaylist() {
         WebElement chosenPlaylist = driver.findElement(By.xpath("//*[@id=\"playlists\"]//a[text() = \"apple\"]"));
-        chosenPlaylist.click();
+        wait.until(ExpectedConditions.elementToBeClickable(chosenPlaylist)).click();
     }
 }
