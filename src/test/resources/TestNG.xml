@@ -3,9 +3,15 @@
 
 <suite name="TestNG">
 
+    <parameter name="BaseURL" value="https://qa.koel.app/"/>
+    <parameter name="Email" value="ana.nicora@testpro.io"/>
+    <parameter name="Password" value="QaKoelApp_1234"/>
+    <parameter name="PlayList" value="huraaa"/>
+
     <test name="Example Test" preserve-order="false">
         <classes>
             <class name="LoginTests"/>
+            <class name="DeletePlayList"/>
             <class name="BaseTest"/>
         </classes>
     </test>
