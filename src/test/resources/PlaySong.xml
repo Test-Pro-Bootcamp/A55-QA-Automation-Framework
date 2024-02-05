@@ -6,10 +6,6 @@
     <test name="playSong" preserve-order="false">
        <classes>
            <class name = "Homework18"/>
-             <methods>
-                 <include name =
-             </methods>
-
        </classes>
     </test>
 </suite>
