@@ -1,7 +1,9 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
@@ -21,7 +23,6 @@ public class DeletePlayList extends  BaseTest{
 
     driver = new ChromeDriver(options);
     driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-    driver.manage().window().maximize();
 
 
     loginValidEmailPassword(baseURL, email, password);
@@ -43,15 +44,28 @@ public class DeletePlayList extends  BaseTest{
   }
 
   @Test
-  public void deletePlayList() {
-    // Click the playlist you want to delete.
-    clickPlaylist();
-    // We should see a red button "x PLAYLIST" on the top right part of the page, and click on it.
-    deleteButton();
+  public void deletePlayList() throws InterruptedException {
+      String playlist = "my musik";
 
-    //  Verify that the confirmation notification displayed has the text, "Deleted playlist {playlist name}".
-    String message = "Deleted playlist \"my musik.\"";
-    Assert.assertEquals(getDeleteMessage(), message);
+      clickPlusButton();
+      chooseNewPlaylist();
+      enterPlaylistName(playlist);
+      Thread.sleep(500);
+
+      String createdMsg = "Created playlist \""+playlist+".\"";
+      Assert.assertEquals(playlistCreated(), createdMsg);
+      Thread.sleep(5000);
+
+      //Click the playlist you want to delete.
+      clickPlaylist();
+
+      // We should see a red button "x PLAYLIST" on the top right part of the page, and click on it.
+      deleteButton();
+      Thread.sleep(500);
+
+      //  Verify that the confirmation notification displayed has the text, "Deleted playlist {playlist name}".
+      String message = "Deleted playlist \""+playlist+".\"";
+      Assert.assertEquals(getDeleteMessage(), message);
   }
 
   public void clickPlaylist() {
@@ -68,5 +82,31 @@ public class DeletePlayList extends  BaseTest{
    WebElement msg = driver.findElement(By.cssSelector("div.success.show"));
    return msg.getText();
  }
+
+  public String playlistCreated() {
+    WebElement notificationMsg = driver.findElement(By.cssSelector("div.success.show"));
+    return notificationMsg.getText();
+  }
+
+    public void enterPlaylistName(String newPlaylistName) {
+    WebElement playlistNameField = driver.findElement(By.cssSelector("input[placeholder='↵ to save']"));
+    playlistNameField.clear();
+    playlistNameField.sendKeys(newPlaylistName);
+    playlistNameField.sendKeys(Keys.ENTER);
+  }
+
+    public void chooseNewPlaylist() {
+    WebElement newPlaylist = driver.findElement(By.cssSelector("#playlists > nav > ul > li:nth-child(1)"));
+    newPlaylist.click();
+  }
+
+  public void clickPlusButton() throws InterruptedException {
+    WebElement btn = driver.findElement(By.cssSelector("#playlists > h1 > i"));
+    Actions s = new Actions(driver);
+    s.moveToElement(btn).build().perform();
+    Thread.sleep(500);
+    s.click(btn).build().perform();
+  }
+
 
 }
