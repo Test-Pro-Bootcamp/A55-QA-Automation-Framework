@@ -10,7 +10,7 @@ public class Homework17 extends BaseTest {
         String namePlaylist= "Green Song";
         String expectedSongAddedSuccessMessage = "Added 1 song into \""+ namePlaylist +".\"";
         String song = "Epic Songs";
-        navigateToPage();
+       // navigateToPage();
         provideEmail("kaflimeerim@gmail.com");
         providePassword("te$t$tudent");
         loginToKoel();

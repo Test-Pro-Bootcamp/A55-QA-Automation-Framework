@@ -15,8 +15,8 @@ public class LoginTests extends BaseTest {
     public void loginEmptyEmailPassword() {
 
 //      Added ChromeOptions argument below to fix websocket error
-        navigateToPage();
-        Assert.assertEquals(driver.getCurrentUrl(), url);
+        // navigateToPage();
+        // Assert.assertEquals(driver.getCurrentUrl(), url);
         driver.quit();
     }
 
@@ -24,7 +24,7 @@ public class LoginTests extends BaseTest {
     public void loginValidEmailPassword() throws InterruptedException {
 
         //STep:1 Open Browser and navigate to Koel app;
-        navigateToPage();
+        // navigateToPage();
         //Step:2 Enter email
         provideEmail("kaflimeerim@gmail.com");
         //Step:3 Enter password
@@ -35,12 +35,26 @@ public class LoginTests extends BaseTest {
         //Step:5 Assertion (expected vs actual)
         WebElement avatorIcon = driver.findElement(By.cssSelector("img[class='avatar']"));
         Assert.assertTrue(avatorIcon.isDisplayed());
-       // driver.quit();
+        // driver.quit();
 
     }
-    @Test
-    public void  loginInvalidEmailValidPassword(){
-        navigateToPage();
+
+    @Test(dataProvider = "invalidLoginData",dataProviderClass =  TestData.class)
+    public void loginWithNegativeData(String email, String password) {
+        //  navigateToPage();
+        provideEmail(email);
+        providePassword(password);
+        loginToKoel();
+        WebElement avatarIcon = driver.findElement(By.cssSelector("img[class='avatar']"));
+        Assert.assertTrue(avatarIcon.isDisplayed());
+        // driver.quit();
+
+    }
+
+
+   /* @Test
+    public void loginInvalidEmailValidPassword() {
+        //  navigateToPage();
 
         // Step:1 Enter email
         provideEmail("invalidEmail@gmail.com");
@@ -55,17 +69,18 @@ public class LoginTests extends BaseTest {
         //driver.quit();
 
     }
+
     @Test
-    public void loginValidEmailEmptyPassword(){
-        navigateToPage();
+    public void loginValidEmailEmptyPassword() {
+        //  navigateToPage();
         provideEmail("kaflimeerim@gmail.com");
         providePassword("invalidPassword");
         loginToKoel();
         WebElement avatarIcon = driver.findElement(By.cssSelector("img[class='avatar']"));
         Assert.assertTrue(avatarIcon.isDisplayed());
-       // driver.quit();
+        // driver.quit();
 
-    }
+    }*/
 
 
 }

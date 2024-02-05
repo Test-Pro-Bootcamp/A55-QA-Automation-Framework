@@ -11,7 +11,7 @@ public class ProfileTest extends BaseTest{
     public void changeProfileName() throws InterruptedException {
 
         //NavigateToPage
-        navigateToPage();
+      //  navigateToPage();
         //Login with correct credentials
         provideEmail("kaflimeerim@gmail.com");
         providePassword("te$t$tudent");
