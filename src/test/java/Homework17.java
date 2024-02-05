@@ -8,7 +8,7 @@ public class Homework17 extends BaseTest {
     @Test
     public void addSongPlayList() throws InterruptedException {
         String namePlaylist= "Green Song";
-        String expectedSongAddedSuccessMessage = "Added 1 song into \""+ namePlaylist +".\"";
+        String expectedSongAddedSuccessMessage = "Added 1 song into \""+namePlaylist +".\"";
         String song = "Epic Songs";
        // navigateToPage();
         provideEmail("kaflimeerim@gmail.com");

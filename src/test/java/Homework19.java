@@ -8,22 +8,20 @@ public class Homework19 extends BaseTest{
 
     @Test
     public void deletePlaylist() throws InterruptedException {
+        String deletedPlaylistSuccessMessage = "Deleted playlist \"Oreo.\"";
         provideEmail("kaflimeerim@gmail.com");
         providePassword("te$t$tudent");
         loginToKoel();
         selectPlaylist();
         Thread.sleep(2000);
         clickDeletePlaylistBtn();
-
         Thread.sleep(2000);
-        String namePlaylist = "Oreo";
-        String deletedPlaylistSuccessMessage = "Deleted Playlist \" " + namePlaylist +".\"";
         Assert.assertEquals(getPlaylistDeletedMessage(),deletedPlaylistSuccessMessage);
 
 
     }
     public String getPlaylistDeletedMessage(){
-        WebElement notification = driver.findElement(By.cssSelector("div.success.hide"));
+        WebElement notification = driver.findElement(By.cssSelector("div.success.show"));
         return notification.getText();
     }
 
