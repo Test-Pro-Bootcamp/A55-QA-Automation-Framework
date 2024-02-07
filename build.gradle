@@ -20,5 +20,6 @@ dependencies {
 test {
     useTestNG() {
         suites "src/test/resources/PlaySong.xml"
+        //suites "src/test/resources/TestNG.xml"
     }
 }
