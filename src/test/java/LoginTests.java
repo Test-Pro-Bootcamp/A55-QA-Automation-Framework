@@ -31,7 +31,7 @@ public class LoginTests extends BaseTest {
         loginBtn.click();
 
         WebElement avatarIcon= driver.findElement(By.cssSelector("img[class='avatar']"));
-        Assert.assertEquals(driver.getCurrentUrl(), url);
+        Assert.assertTrue(avatarIcon.isDisplayed());
         driver.quit();
     }
 }

@@ -7,6 +7,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.Test;
 
 import java.time.Duration;
 
@@ -51,36 +52,7 @@ public class BaseTest {
         emailField.clear();
         emailField.sendKeys(email);
     }
-    public void searchSong(String songName) {
-        WebElement searchField = driver.findElement(By.xpath("//input[@type='search']"));
-        searchField.clear();
-        searchField.sendKeys(songName);
-    }
 
-    public void clickViewAllBtn() {
-        WebElement clickViewAllBtn = driver.findElement(By.xpath("//button[@data-test='view-all-songs-btn']"));
-        clickViewAllBtn.click();
-    }
-
-    public void clickFirstSongResult() {
-        WebElement firstSong = driver.findElement(By.xpath("//section[@id='songResultsWrapper']//tr[@class='song-item'][1]"));
-        firstSong.click();
-    }
-
-    public void clickAddToBtn() {
-        WebElement addToBtn = driver.findElement(By.xpath("//section[@id='songResultsWrapper']//button[@data-test='add-to-btn']"));
-        addToBtn.click();
-    }
-
-    public void choosePlaylist() {
-        WebElement choosePlayList = driver.findElement(By.xpath("//section[@id='songResultsWrapper']//section[@class='existing-playlists']//li[5]"));
-        choosePlayList.click();
-    }
-
-    public String getSongAddedSuccessMsg() {
-        WebElement notification = driver.findElement(By.cssSelector("div.success.show"));
-        return notification.getText();
-    }
 
 
 }
