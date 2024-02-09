@@ -49,17 +49,17 @@ public class homeWork21 extends BaseTest{
         loginButton();
         Actions action = new Actions(driver);
         //Step2: Navigate to the chosen playlist using xpath
-        WebElement chosenPlaylist = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//section[@id='playlists']/ul//a[@href='#!/playlist/87052']")));
+        WebElement chosenPlaylist = driver.findElement(By.xpath("//section[@id='playlists']/ul//a[@href='#!/playlist/87052']"));
+        wait.until(ExpectedConditions.visibilityOf(chosenPlaylist)).click();
         //Step3: Right click on the chosen playlist using actions
         action.contextClick(chosenPlaylist).build().perform();
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         //Step4: Choose the edit option using locator
         WebElement editButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//section[@id='playlists']/ul/li[5]//li[1]")));
         wait.until(ExpectedConditions.elementToBeClickable(editButton)).click();
         Thread.sleep(1000);
         //Step5: Clear the field
-        action.doubleClick(chosenPlaylist).build().perform();
-        chosenPlaylist.sendKeys(Keys.BACK_SPACE);
+        chosenPlaylist.sendKeys(Keys.chord(Keys.CONTROL,"a",Keys.BACK_SPACE));
         //Step6: Enter the new name
         chosenPlaylist.sendKeys("New name");
         //Step7: Press the enter key
