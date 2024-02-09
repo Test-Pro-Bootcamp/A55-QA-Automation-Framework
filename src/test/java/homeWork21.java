@@ -59,7 +59,7 @@ public class homeWork21 extends BaseTest{
         wait.until(ExpectedConditions.elementToBeClickable(editButton)).click();
         Thread.sleep(1000);*/
         //Step5: Clear the field
-        WebElement playlistNewNameField = driver.findElement(By.xpath("//section[@id='playlists']/ul//input[@type='text'']"));
+        WebElement playlistNewNameField = driver.findElement(By.xpath("//section[@id='playlists']/ul/li[5]/input[@type='text'']"));
         chosenPlaylist.sendKeys(Keys.chord(Keys.CONTROL,"a",Keys.BACK_SPACE));
         //Step6: Enter the new name
         chosenPlaylist.sendKeys("New name");
