@@ -6,21 +6,26 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class HomeWork21 extends BaseTest{
-    public Actions action = new Actions(driver);
+public class homeWork21 extends BaseTest{
+
     @Test
-    public void renameSmartPlaylist(){
+    public void renameSmartPlaylist() throws InterruptedException {
         //Step1: login to the Koel website.
         enterEmail("nayana.rao.subramanya@testpro.io");
         enterPassword("Zqmvyk4hDaZ3vga");
         loginButton();
+        Thread.sleep(2000);
+        Actions action = new Actions(driver);
 
-        WebElement playlistSmart = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"playlists\"]//a[contains(@href,'70585')]")));
+        WebElement playlistSmart = driver.findElement(By.xpath("//*[@id=\"playlists\"]//a[contains(@href,'70585')]"));
         //Step2: Navigate to the chosen playlist using xpath //*[@id="playlists"]//a[contains(@href,'70585')]
         //Step3: Right click on the chosen playlist using actions
-        action.contextClick(playlistSmart).perform();
+        action.contextClick(playlistSmart).build().perform();
+        Thread.sleep(2000);
         //Step4: Choose the edit option using locator [data-testid="playlist-context-menu-edit-70585"]
-       editButtonClick();
+        WebElement editButton = driver.findElement(By.xpath("//section[@id='playlists']/ul/li[3]//li[1]"));
+        editButton.click();
+        Thread.sleep(2000);
         //Step5: Click on the name field using locator [name="name"]
         WebElement nameField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[name=\"name\"]")));
         nameField.click();
@@ -33,33 +38,37 @@ public class HomeWork21 extends BaseTest{
         saveButton.click();
         //Step9: Confirm Success message using notification xpath: //div[@class="alertify-logs top right"]/div[@class='success show']
         WebElement successMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class=\"alertify-logs top right\"]/div[@class='success show']")));
-        String messageOfSuccess = "Updated playlist \"New Smart.\"";
         //Step10: messageExpected is Updated playlist "New Smart."
-        Assert.assertEquals(successMessage.getText(),messageOfSuccess);
+        Assert.assertEquals(successMessage.getText(),"Updated playlist \"New Smart.\"" );
     }
     @Test
-    public void renamePlaylist(){
-        //Step1: login to the Koel website.
+    public void renamePlaylist() throws InterruptedException {
+        //Step1: login to the website.
         enterEmail("nayana.rao.subramanya@testpro.io");
         enterPassword("Zqmvyk4hDaZ3vga");
         loginButton();
-
+        Actions action = new Actions(driver);
         //Step2: Navigate to the chosen playlist using xpath
-        WebElement chosenPlaylist = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//section[@id =\"playlists\"]//a[contains(@href,87052)]")));
+        WebElement chosenPlaylist = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//section[@id='playlists']/ul//a[@href='#!/playlist/87052']")));
         //Step3: Right click on the chosen playlist using actions
-        action.contextClick(chosenPlaylist).perform();
-        //Step4: Choose the edit option using locator [data-testid="playlist-context-menu-edit-70585"]
-        editButtonClick();
+        action.contextClick(chosenPlaylist).build().perform();
+        Thread.sleep(1000);
+        //Step4: Choose the edit option using locator
+        WebElement editButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//section[@id='playlists']/ul/li[5]//li[1]")));
+        wait.until(ExpectedConditions.elementToBeClickable(editButton)).click();
+        Thread.sleep(1000);
         //Step5: Clear the field
-        chosenPlaylist.clear();
+        action.doubleClick(chosenPlaylist).build().perform();
+        chosenPlaylist.sendKeys(Keys.BACK_SPACE);
         //Step6: Enter the new name
         chosenPlaylist.sendKeys("New name");
         //Step7: Press the enter key
-        action.sendKeys(Keys.RETURN);
+        chosenPlaylist.sendKeys(Keys.RETURN);
         //Step8: Confirm we received the notification "Updated playlist \"New Playlist.\""
         String sucessMessage = "Updated playlist \"New name.\"";
         WebElement messageOfSuccess = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class=\"alertify-logs top right\"]/div[@class='success show']")));
         Assert.assertEquals(messageOfSuccess.getText(),sucessMessage);
 
     }
+
 }

@@ -14,30 +14,34 @@ import org.testng.annotations.Parameters;
 import java.time.Duration;
 
 public class BaseTest {
-    public WebDriver driver;
+    public static WebDriver driver;
     public WebDriverWait wait;
+
 
     @BeforeSuite
     public static void setupClass() {
+
         WebDriverManager.chromedriver().setup();
     }
     @BeforeMethod
     @Parameters({"BaseURL"})
-    public void setupBrowser(String BaseURL){
+    public void setupBrowser(String baseUrl){
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         driver.manage().window().maximize();
         wait = new WebDriverWait(driver,Duration.ofSeconds(3));
-        launchWebsite(BaseURL);
+        launchWebsite(baseUrl);
     }
     @AfterMethod
     public void tearDown(){
+
         driver.quit();
     }
 
     public void launchWebsite(String baseURL) {
+
         driver.get(baseURL);
     }
     public void enterEmail(String email){
@@ -54,8 +58,7 @@ public class BaseTest {
         WebElement loginButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type=\"submit\"]")));
         loginButton.click();
     }
-    public void editButtonClick() {
-        WebElement editButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[contains(@data-testid,\"playlist-context-menu-edit\")]")));
-        editButton.click();
+    public void editButtonClick() throws InterruptedException {
+
     }
 }
