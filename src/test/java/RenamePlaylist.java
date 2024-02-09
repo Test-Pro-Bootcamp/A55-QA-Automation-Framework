@@ -1,5 +1,6 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -13,14 +14,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 import java.time.Duration;
-import java.time.Instant;
 
-public class DeletePlayList extends BaseTest {
-    //  Navigate to "https://qa.koel.app/".
-    // Log in with your credentials.
+public class RenamePlaylist extends BaseTest {
 
     @BeforeMethod
     @Parameters({"BaseURL", "Email", "Password"})
+
     public void start(String baseURL, String email, String password) {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
@@ -28,10 +27,10 @@ public class DeletePlayList extends BaseTest {
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
+        actions = new Actions(driver);
 
         loginValidEmailPassword(baseURL, email, password);
     }
-
 
     private void loginValidEmailPassword(String baseURL, String email, String password) {
         //Steps 1: Open Browser and navigate to Koel app.
@@ -49,27 +48,50 @@ public class DeletePlayList extends BaseTest {
 
     @Test
     @Parameters({"PlayList"})
-    public void deletePlayList(String playList) throws InterruptedException {
+    public void RenamePlayList(String playlist) throws InterruptedException {
         clickPlusButton();
         chooseNewPlaylist();
-        enterPlaylistName(playList);
+        enterPlaylistName(playlist);
 
-        String createdMsg = "Created playlist \"" + playList + ".\"";
+        String createdMsg = "Created playlist \"" + playlist + ".\"";
         Assert.assertEquals(getNotification(), createdMsg);
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div.success.show")));
 
 
-        //Click the playlist you want to delete.
-        clickPlaylist(playList);
+        String newName = playlist +"-renamed";
+        renamePlaylist(playlist, newName);
 
-        // We should see a red button "x PLAYLIST" on the top right part of the page, and click on it.
+        String message = "Updated playlist \"" + newName + ".\"";
+        Assert.assertEquals(getNotification(), message);
+
+        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div.success.show")));
+
+        //Click the playlist you want to rename.
+        clickPlaylist(newName);
         deleteButton();
 
         //  Verify that the confirmation notification displayed has the text, "Deleted playlist {playlist name}".
-        String message = "Deleted playlist \"" + playList + ".\"";
+        message = "Deleted playlist \"" + newName + ".\"";
         Assert.assertEquals(getNotification(), message);
+    }
+
+    public void  renamePlaylist (String oldName, String newName) throws InterruptedException {
+        WebElement playlist = driver.findElement(By.xpath("//section[@id='playlists']//a[text()='"+ oldName +"']"));
+
+        actions.moveToElement(playlist).build().perform();
+        actions.pause(100).build().perform();
+        actions.contextClick(playlist).build().perform();
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement edit = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//section[@id='playlists']//nav[@class='menu playlist-item-menu']//li[text()='Edit']")));
+        edit.click();
+
+        WebElement playlistNameField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[data-testid='inline-playlist-name-input']")));
+        playlistNameField.sendKeys(Keys.HOME, Keys.chord(Keys.SHIFT, Keys.END), newName);
+        playlistNameField.sendKeys(Keys.ENTER);
     }
 
     public void clickPlaylist(String playlist) {
@@ -77,13 +99,6 @@ public class DeletePlayList extends BaseTest {
         WebElement playlistBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//section[@id='playlists']//a[text()='"+ playlist +"']")));
         playlistBtn.click();
     }
-
-    public void deleteButton() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        WebElement deleteBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@class='del btn-delete-playlist']")));
-        deleteBtn.click();
-    }
-
 
     public String getNotification() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
@@ -111,6 +126,12 @@ public class DeletePlayList extends BaseTest {
         s.moveToElement(btn).build().perform();
         s.pause(100).build().perform();
         s.click(btn).build().perform();
+    }
+
+    public void deleteButton() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        WebElement deleteBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@class='del btn-delete-playlist']")));
+        deleteBtn.click();
     }
 
 
