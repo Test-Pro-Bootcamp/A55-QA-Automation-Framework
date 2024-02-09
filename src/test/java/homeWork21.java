@@ -60,11 +60,11 @@ public class homeWork21 extends BaseTest{
         Thread.sleep(1000);*/
         //Step5: Clear the field
         WebElement playlistNewNameField = driver.findElement(By.xpath("//section[@id='playlists']/ul/li[5]/input[@type='text'']"));
-        chosenPlaylist.sendKeys(Keys.chord(Keys.CONTROL,"a",Keys.BACK_SPACE));
+        playlistNewNameField.sendKeys(Keys.chord(Keys.CONTROL,"a",Keys.BACK_SPACE));
         //Step6: Enter the new name
-        chosenPlaylist.sendKeys("New name");
+        playlistNewNameField.sendKeys("New name");
         //Step7: Press the enter key
-        chosenPlaylist.sendKeys(Keys.RETURN);
+        playlistNewNameField.sendKeys(Keys.RETURN);
         //Step8: Confirm we received the notification "Updated playlist \"New Playlist.\""
         String sucessMessage = "Updated playlist \"New name.\"";
         WebElement messageOfSuccess = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class=\"alertify-logs top right\"]/div[@class='success show']")));
