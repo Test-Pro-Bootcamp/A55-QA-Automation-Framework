@@ -1,28 +1,26 @@
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+import pages.HomePage;
+import pages.LoginPage;
 
-import java.time.Duration;
 
 public class LoginTests extends BaseTest {
+
+    //Login with Valid email Test using the Page Object Model
     @Test
-    public void loginValidEmailPassword() throws InterruptedException {
-        //Steps 1: Open Browser and navigate to Koel app.
-        //navigateToPage();
-        //Step 2: Enter email
-        provideEmail("ana.nicora@testpro.io");
-        //Step 3: Enter Password
-        providePassword("QaKoelApp_1234");
-        //Step 4: Click on Login button
-        loginToKoel();
-        //Assertion (expected vs actual)
-        WebElement avatarIcon = driver.findElement(By.cssSelector("img[class='avatar']"));
-        Assert.assertTrue(avatarIcon.isDisplayed());
+    @Parameters({"BaseURL", "Email", "Password"})
+    public void loginValidEmailValidPasswordTest(String baseURL, String email, String password) {
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
+
+        loginPage.login(baseURL, email, password);
+
+        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
     }
 
+
 }
+
+
 
