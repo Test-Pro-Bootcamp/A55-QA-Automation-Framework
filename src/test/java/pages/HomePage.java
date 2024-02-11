@@ -9,12 +9,12 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 public class HomePage extends BasePage {
     String newPlaylistName1 = "VIVO";
 
-    By avatarIcon = By.cssSelector("[[class='avatar']]");
-    By newPlaylist = By.cssSelector("[data-testid='playlist-context-menu-create-simple']");
-    By clickPlusButton1 = By.cssSelector("[data-testid='sidebar-create-playlist-btn']");
-    By playlistNameField = By.cssSelector("[name='name']");
-    By notificationMsg = By.cssSelector("div.success.show");
-    By playlist = By.xpath("//section[@id='playlists']//li//a[contains(text(),'vivo')]");
+    private By avatarIcon = By.cssSelector("[[class='avatar']]");
+    private By newPlaylist = By.cssSelector("[data-testid='playlist-context-menu-create-simple']");
+    private By clickPlusButton1 = By.cssSelector("[data-testid='sidebar-create-playlist-btn']");
+    private By playlistNameField = By.cssSelector("[name='name']");
+    private By notificationMsg = By.cssSelector("div.success.show");
+    private By playlist = By.xpath("//section[@id='playlists']//li//a[contains(text(),'vivo')]");
 
 
     public HomePage(WebDriver givenDriver) {
