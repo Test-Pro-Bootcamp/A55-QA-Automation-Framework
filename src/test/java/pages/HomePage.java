@@ -5,9 +5,6 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 public class HomePage extends BasePage{
 
@@ -16,14 +13,14 @@ public class HomePage extends BasePage{
     }
 
     //Web-Elements
-    By userAvatarIcon = By.cssSelector("img.avatar");
-    By plusButton = By.cssSelector("#playlists > h1 > i");
-    By playlistNewBtn = By.cssSelector("#playlists > nav > ul > li:nth-child(1)");
-    By inputPlaylist = By.cssSelector("input[placeholder='↵ to save']");
-    By popUpMessage = By.cssSelector("div.success.show");
-    By editBtn = By.xpath("//section[@id='playlists']//nav[@class='menu playlist-item-menu']//li[text()='Edit']");
-    By playlistName = By.cssSelector("input[data-testid='inline-playlist-name-input']");
-    By deletePlaylist = By.xpath("//button[@class='del btn-delete-playlist']");
+    private final By userAvatarIcon = By.cssSelector("img.avatar");
+    private final By plusButton = By.cssSelector("#playlists > h1 > i");
+    private final By playlistNewBtn = By.cssSelector("#playlists > nav > ul > li:nth-child(1)");
+    private final By inputPlaylist = By.cssSelector("input[placeholder='↵ to save']");
+    private final By popUpMessage = By.cssSelector("div.success.show");
+    private final By editBtn = By.xpath("//section[@id='playlists']//nav[@class='menu playlist-item-menu']//li[text()='Edit']");
+    private final By playlistName = By.cssSelector("input[data-testid='inline-playlist-name-input']");
+    private final By deletePlaylist = By.xpath("//button[@class='del btn-delete-playlist']");
 
     private By lookupPlayListByByName(String name) {
         return By.xpath("//section[@id='playlists']//a[text()='"+ name +"']");

@@ -11,9 +11,9 @@ import java.time.Duration;
 
 public abstract class BasePage {
 
-    WebDriver driver;
-    WebDriverWait wait;
-    Actions actions;
+    protected WebDriver driver;
+    protected WebDriverWait wait;
+    protected Actions actions;
 
 
     public BasePage(WebDriver givenDriver){
@@ -22,8 +22,7 @@ public abstract class BasePage {
       actions = new Actions(driver);
     }
 
-    public WebElement findElement(By locator){
+    protected WebElement findElement(By locator){
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
-
 }

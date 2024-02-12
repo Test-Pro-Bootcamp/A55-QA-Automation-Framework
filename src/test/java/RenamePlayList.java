@@ -5,9 +5,9 @@ import pages.LoginPage;
 
 public class RenamePlayList extends BaseTest {
 
-    LoginPage loginPage;
+    private LoginPage loginPage;
 
-    HomePage homePage;
+    private HomePage homePage;
 
     @BeforeSuite
     @Parameters({"BaseURL", "Email", "Password"})
