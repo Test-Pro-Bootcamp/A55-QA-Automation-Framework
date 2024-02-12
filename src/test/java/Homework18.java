@@ -8,7 +8,7 @@ public class Homework18 extends BaseTest{
     public void playSong() throws InterruptedException {
 
 
-        navigateToPage("https://qa.koel.app/");
+        //navigateToPage();
         provideEmail("kseniya.potsina@testpro.io");
         providePassword("testproA55");
         loginToKoel();

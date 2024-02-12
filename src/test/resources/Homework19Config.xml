@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="Homework18">
+<suite name="Homework19">
 
-    <test name="Homework18" preserve-order="false">
+    <test name="Homework19" preserve-order="false">
         <parameter name="BaseURL" value="https://qa.koel.app/" />
         <classes>
-            <class name="BaseTest"/>
-            <class name="Homework18">
+            <class name="Homework19">
                 <methods>
-                    <include name="playSong"/>
+                    <include name="deletePlaylist"/>
                 </methods>
             </class>
         </classes>
