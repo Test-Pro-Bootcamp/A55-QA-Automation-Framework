@@ -14,10 +14,11 @@ public class Homework19 extends BaseTest{
         providePassword("te$t$tudent");
         loginToKoel();
         selectPlaylist();
-        Thread.sleep(2000);
+        //Thread.sleep(2000);
         clickDeletePlaylistBtn();
-        Thread.sleep(2000);
+        //Thread.sleep(2000);
         Assert.assertEquals(getPlaylistDeletedMessage(),deletedPlaylistSuccessMessage);
+       // Assert.assertTrue(wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show"))).isDisplayed();
 
 
     }
