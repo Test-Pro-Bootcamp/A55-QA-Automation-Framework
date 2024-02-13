@@ -7,17 +7,17 @@ public class LogInPage extends BasePage{
     public LogInPage(WebDriver givenDriver) {
         super(givenDriver);
     }
-    By emailField= By.cssSelector("input(type='email']");
-    By passwordField = By.cssSelector("input(type='password']");
-    By submitButton= By.cssSelector("button[type='submit']");
+    static By emailField= By.cssSelector("input(type='email']");
+    static By passwordField = By.cssSelector("input(type='password']");
+    static By submitButton= By.cssSelector("button[type='submit']");
 
-    public void provideEmail(String email){
+    public static void provideEmail(String email){
         findElement(emailField).sendKeys(email);
     }
-    public void providePassword(String password){
+    public static void providePassword(String password){
         findElement(passwordField).sendKeys(password);
     }
-    public void clickSubmit(){
+    public static void clickSubmit(){
         findElement(submitButton).click();
     }
 

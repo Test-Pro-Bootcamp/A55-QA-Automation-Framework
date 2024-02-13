@@ -11,7 +11,7 @@ import java.time.Duration;
 
 public class BasePage {
     WebDriver driver;
-    WebDriverWait wait;
+    static WebDriverWait wait;
     Actions actions;
 
     public BasePage(WebDriver givenDriver){
@@ -19,7 +19,7 @@ public class BasePage {
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         actions = new Actions(driver);
     }
-    public WebElement findElement(By locator){
+    public static WebElement findElement(By locator){
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 }
