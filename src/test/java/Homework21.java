@@ -20,7 +20,6 @@ public class Homework21 extends BaseTest {
         //clearTheField();
         Assert.assertEquals(getSuccessUpdatedPlayListMessage(), expectedSuccessUpdateMessage );
     }
-
     public void enterNewName() {
         WebElement NewName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[name='name']")));
         //clear does not work, element has an attribute of 'required'
