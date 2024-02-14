@@ -7,10 +7,10 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class Homework21 extends BaseTest {
-    String NewPlaylistName = "new_list";
+    String NewPlaylistName = "myList";
     @Test
-    public void renamePlayList()   {
-        String expectedSuccessUpdateMessage = "Updated playlist \"my_list..\"";
+    public void renamePlayList()  {
+        String expectedSuccessUpdateMessage = "Updated playlist \"myList..\"";
         //navigateToUrl();
         provideEmail("aida.taymaskhanova@testpro.io");
         providePassword("Ozzikpozzik18");
@@ -20,13 +20,16 @@ public class Homework21 extends BaseTest {
         //clearTheField();
         Assert.assertEquals(getSuccessUpdatedPlayListMessage(), expectedSuccessUpdateMessage );
     }
-    public void enterNewName() {
+    public void enterNewName()  {
         WebElement NewName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[name='name']")));
         //clear does not work, element has an attribute of 'required'
         //workaround is ctrl A(to select all) then backspace to clear then replace with
         // with new playlist mame
-        NewName.sendKeys(Keys.chord(Keys.COMMAND, "A", Keys.BACK_SPACE));
-        NewName.sendKeys("new_list");
+
+        //NewName.sendKeys(Keys.chord(Keys.COMMAND, "A"));
+        //NewName.sendKeys(Keys.BACK_SPACE);
+        NewName.sendKeys(Keys.CONTROL + "a", Keys.DELETE);
+        NewName.sendKeys("myList");
         NewName.sendKeys(Keys.ENTER);
     }
 
