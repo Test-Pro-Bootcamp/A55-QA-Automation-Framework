@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class LoginPage extends BasePage{
     public LoginPage(WebDriver givenDriver) {
@@ -11,9 +12,17 @@ public class LoginPage extends BasePage{
 
     //Web Elements
 
-    private By emailField = By.cssSelector("input[type='email']");
-    private By passwordField = By.cssSelector("input[type='password']");
-    private  By loginBtn = By.cssSelector("button[type='submit']");
+    //private By emailField = By.cssSelector("input[type='email']");
+    @FindBy(css = "input[type='email']")
+    private WebElement emailField;
+
+    //private By passwordField = By.cssSelector("input[type='password']");
+    @FindBy(css = "input[type='password']")
+    private WebElement passwordField;
+
+    //private  By loginBtn = By.cssSelector("button[type='submit']");
+    @FindBy(css = "button[type='submit']")
+    private WebElement loginBtn;
 
 
     //Helper Methods

@@ -5,83 +5,101 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.FindBy;
 
-public class HomePage extends BasePage{
+public class HomePage extends BasePage {
 
     public HomePage(WebDriver givenDriver) {
         super(givenDriver);
     }
 
     //Web-Elements
-    private final By userAvatarIcon = By.cssSelector("img.avatar");
-    private final By plusButton = By.cssSelector("#playlists > h1 > i");
-    private final By playlistNewBtn = By.cssSelector("#playlists > nav > ul > li:nth-child(1)");
-    private final By inputPlaylist = By.cssSelector("input[placeholder='↵ to save']");
-    private final By popUpMessage = By.cssSelector("div.success.show");
-    private final By editBtn = By.xpath("//section[@id='playlists']//nav[@class='menu playlist-item-menu']//li[text()='Edit']");
-    private final By playlistName = By.cssSelector("input[data-testid='inline-playlist-name-input']");
-    private final By deletePlaylist = By.xpath("//button[@class='del btn-delete-playlist']");
+    //private final By userAvatarIcon = By.cssSelector("img.avatar");
+    @FindBy(css = "[class='avatar']")
+    private WebElement userAvatarIcon;
+    // private final By plusButton = By.cssSelector("#playlists > h1 > i");
+    @FindBy(css = "#playlists > h1 > i")
+    private WebElement plusButton;
+
+    // private final By playlistNewBtn = By.cssSelector("#playlists > nav > ul > li:nth-child(1)");
+    @FindBy(css = "#playlists > nav > ul > li:nth-child(1)")
+    private WebElement playlistNewBtn;
+
+    // private final By inputPlaylist = By.cssSelector("input[placeholder='↵ to save']");
+    @FindBy(css = "input[placeholder='↵ to save']")
+    private WebElement inputPlaylist;
+
+    //private final By popUpMessage = By.cssSelector("div.success.show");
+    @FindBy(css = "div.success.show")
+    private WebElement popUpMessage;
+
+    //private final By editBtn = By.xpath("//section[@id='playlists']//nav[@class='menu playlist-item-menu']//li[text()='Edit']");
+    @FindBy(xpath = "//section[@id='playlists']//nav[@class='menu playlist-item-menu']//li[text()='Edit']")
+    private WebElement editBtn;
+
+    //private final By playlistName = By.cssSelector("input[data-testid='inline-playlist-name-input']");
+    @FindBy(css = "input[data-testid='inline-playlist-name-input']")
+    private WebElement playlistName;
+
+    //private final By deletePlaylist = By.xpath("//button[@class='del btn-delete-playlist']");
+    @FindBy(xpath = "//button[@class='del btn-delete-playlist']")
+    private WebElement deletePlaylist;
 
     private By lookupPlayListByByName(String name) {
-        return By.xpath("//section[@id='playlists']//a[text()='"+ name +"']");
+        return By.xpath("//section[@id='playlists']//a[text()='" + name + "']");
     }
     //Helper Methods
 
-    public WebElement getUserAvatar(){
-        return findElement(userAvatarIcon);
+    public WebElement getUserAvatar() {
+        return userAvatarIcon;
     }
 
-    public void clickPlusButton() {
-        WebElement btn = driver.findElement(plusButton);
-
-        actions.moveToElement(btn).build().perform();
-        actions.pause(100).build().perform();
-        actions.click(btn).build().perform();
+    public HomePage clickPlusButton() {
+        clickThroughActions(plusButton, 100);
+        return this;
     }
 
-    public void clickNewPlayList() {
-        WebElement newPlaylist = wait.until(ExpectedConditions.visibilityOfElementLocated(playlistNewBtn));
-        newPlaylist.click();
+    public HomePage clickNewPlayList() {
+        click(playlistNewBtn);
+        return this;
     }
 
-    public void enterPlaylistName(String name) {
-        WebElement playlistNameField = driver.findElement(inputPlaylist);
-        playlistNameField.clear();
+    public HomePage enterPlaylistName(String name) {
+        WebElement playlistNameField = findElement(inputPlaylist);
         playlistNameField.sendKeys(name);
         playlistNameField.sendKeys(Keys.ENTER);
+        return this;
     }
 
     public void waitForMessage() {
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(popUpMessage));
+        wait.until(ExpectedConditions.invisibilityOf(popUpMessage));
     }
 
     public String getNotification() {
-        WebElement notificationMsg = wait.until(ExpectedConditions.visibilityOfElementLocated(popUpMessage));
+        WebElement notificationMsg = findElement(popUpMessage);
         return notificationMsg.getText();
     }
 
-    public void  renamePlayList (String oldName, String newName) {
-        WebElement playlist = driver.findElement(lookupPlayListByByName(oldName));
+    public void renamePlayList(String oldName, String newName) {
+        WebElement playlist = findElement(lookupPlayListByByName(oldName));
 
-        actions.moveToElement(playlist).build().perform();
-        actions.pause(100).build().perform();
-        actions.contextClick(playlist).build().perform();
+        contextClickThroughActions(playlist, 100);
 
-        WebElement edit = wait.until(ExpectedConditions.visibilityOfElementLocated(editBtn));
-        edit.click();
+        click(findElement(editBtn));
 
-        WebElement playlistNameField = wait.until(ExpectedConditions.visibilityOfElementLocated(playlistName));
+        WebElement playlistNameField = findElement(playlistName);
         playlistNameField.sendKeys(Keys.HOME, Keys.chord(Keys.SHIFT, Keys.END), newName);
         playlistNameField.sendKeys(Keys.ENTER);
     }
 
-    public void selectPlayList(String name) {
-        WebElement playlistBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(lookupPlayListByByName(name)));
-        playlistBtn.click();
+    public HomePage selectPlayList(String name) {
+        click(findElement(lookupPlayListByByName(name)));
+        return this;
     }
 
-    public void clickDeleteButton() {
-        WebElement deleteBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(deletePlaylist));
+    public HomePage clickDeleteButton() {
+        WebElement deleteBtn = findElement(deletePlaylist);
         deleteBtn.click();
+        return this;
     }
 }

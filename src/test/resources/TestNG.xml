@@ -12,7 +12,6 @@
         <classes>
             <class name="LoginTests"/>
             <class name="RenamePlayList"/>
-            <class name="BaseTest"/>
         </classes>
     </test>
 </suite>

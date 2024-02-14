@@ -11,8 +11,8 @@ public class RenamePlayList extends BaseTest {
 
     @BeforeSuite
     @Parameters({"BaseURL", "Email", "Password"})
-    void renamePlaylistBeforeSuite(String baseURL, String email, String password) {
-        baseBeforeSuite();
+    void beforeSuite(String baseURL, String email, String password) {
+        initChromeDriver();
 
         loginPage = new LoginPage(driver);
         homePage = new HomePage(driver);
@@ -22,16 +22,16 @@ public class RenamePlayList extends BaseTest {
     }
 
     @AfterSuite
-    void renamePlaylistAfterSuite() {
-        baseAfterSuite();
+    void afterSuite() {
+        quitChromeDriver();
     }
 
     @Test
     @Parameters({"PlayList"})
-    public void renamingPlayList(String playlist) {
-        homePage.clickPlusButton();
-        homePage.clickNewPlayList();
-        homePage.enterPlaylistName(playlist);
+    public void renamingPlayListTest(String playlist) {
+        homePage.clickPlusButton()
+                .clickNewPlayList()
+                .enterPlaylistName(playlist);
 
 
         String createdMsg = "Created playlist \"" + playlist + ".\"";
@@ -42,18 +42,18 @@ public class RenamePlayList extends BaseTest {
         String newName = playlist + "-renamed";
         homePage.renamePlayList(playlist, newName);
 
-        String message = "Updated playlist \"" + newName + ".\"";
-        Assert.assertEquals(homePage.getNotification(), message);
+        String updatedMsg = "Updated playlist \"" + newName + ".\"";
+        Assert.assertEquals(homePage.getNotification(), updatedMsg);
 
         homePage.waitForMessage();
 
         //Click the playlist you want to rename.
-        homePage.selectPlayList(newName);
-        homePage.clickDeleteButton();
+        homePage.selectPlayList(newName)
+                .clickDeleteButton();
 
         //  Verify that the confirmation notification displayed has the text, "Deleted playlist {playlist name}".
-        message = "Deleted playlist \"" + newName + ".\"";
-        Assert.assertEquals(homePage.getNotification(), message);
+        String deletedMsg = "Deleted playlist \"" + newName + ".\"";
+        Assert.assertEquals(homePage.getNotification(), deletedMsg);
     }
 
 }
