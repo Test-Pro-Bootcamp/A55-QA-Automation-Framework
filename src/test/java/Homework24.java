@@ -1,15 +1,9 @@
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import Pages.HomePage;
 import Pages.LoginPage;
 
-import java.time.Instant;
-
-public class Homework23 extends BaseTest {
+public class Homework24 extends BaseTest {
 
     String createdPlaylist = "Created playlist \"vivo.\"";
     String updatedPlaylistMsg = "Updated playlist \"VIVO.\"";

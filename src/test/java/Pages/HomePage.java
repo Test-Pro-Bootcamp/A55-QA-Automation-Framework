@@ -18,7 +18,7 @@ public class HomePage extends BasePage {
     @FindBy(css = "[data-testid='playlist-context-menu-create-simple']")
     private WebElement newPlaylist;
 
-    @FindBy(css = "[data-testid='sidebar-create-playlist-btn']")
+    @FindBy(css = "[class='fa fa-plus-circle create']")
     private WebElement clickPlusButton1;
 
     @FindBy(css = "[name='name']")
@@ -36,11 +36,13 @@ public class HomePage extends BasePage {
     }
 
     public HomePage chooseNewPlaylist() {
+        wait.until(ExpectedConditions.visibilityOf(newPlaylist));
         newPlaylist.click();
         return this;
     }
 
     public HomePage clickPlusButton() {
+        wait.until(ExpectedConditions.elementToBeClickable(clickPlusButton1));
         clickPlusButton1.click();
         return this;
     }
@@ -63,6 +65,7 @@ public class HomePage extends BasePage {
     }
 
     public String playlistMsgSuccess() {
+        wait.until(ExpectedConditions.visibilityOf(notificationMsg));
         return notificationMsg.getText();
     }
 
