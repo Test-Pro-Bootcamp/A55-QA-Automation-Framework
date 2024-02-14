@@ -8,7 +8,6 @@ import org.testng.annotations.Test;
 
 public class Homework21 extends BaseTest {
     String NewPlaylistName = "new_list";
-
     @Test
     public void renamePlayList()   {
         String expectedSuccessUpdateMessage = "Updated playlist \"my_list..\"";
