@@ -38,6 +38,7 @@ public class BaseTest {
         //explicit wait don't forget to create an object in the beginning of the class WebDriverWait wait;
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         navigateToUrl(baseURL);
+        Actions actions = new Actions(driver);
     }
 
 
