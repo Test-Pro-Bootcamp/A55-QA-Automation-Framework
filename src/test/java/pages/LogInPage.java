@@ -5,12 +5,15 @@ import org.openqa.selenium.WebDriver;
 
 public class LogInPage extends BasePage{
     public LogInPage(WebDriver givenDriver) {
+
         super(givenDriver);
     }
-    static By emailField= By.cssSelector("input(type='email']");
-    static By passwordField = By.cssSelector("input(type='password']");
+    //web elements
+    static By emailField= By.cssSelector("input[type='email']");
+    static By passwordField = By.cssSelector("input[type='password']");
     static By submitButton= By.cssSelector("button[type='submit']");
 
+    //helper methods
     public static void provideEmail(String email){
         findElement(emailField).sendKeys(email);
     }
@@ -18,6 +21,7 @@ public class LogInPage extends BasePage{
         findElement(passwordField).sendKeys(password);
     }
     public static void clickSubmit(){
+
         findElement(submitButton).click();
     }
 

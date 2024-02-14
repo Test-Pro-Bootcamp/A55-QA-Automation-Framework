@@ -4,8 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+//in page objects (LogInPage BasePage )we write helper methods and elements.
 public class HomePage extends BasePage {
     public HomePage(WebDriver givenDriver) {
+
         super(givenDriver);
     }
     By userAvatarIcon= By.cssSelector("img.avatar");

@@ -8,9 +8,11 @@ import pages.LogInPage;
 
 import java.time.Duration;
 
+//login with valid email using object method
 public class LoginTests extends BaseTest {
     @Test
     public void loginValidEmailPasswordTest() {
+        //creating objects
         LogInPage loginPage = new LogInPage(driver);
         HomePage homePage = new HomePage(driver);
         LogInPage.provideEmail("aida.taymaskhanova@testpro.io");
