@@ -20,7 +20,6 @@ public class BaseTest {
 
     @BeforeSuite
     public static void setupClass() {
-
         WebDriverManager.chromedriver().setup();
     }
     @BeforeMethod
@@ -32,7 +31,8 @@ public class BaseTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         driver.manage().window().maximize();
         wait = new WebDriverWait(driver,Duration.ofSeconds(3));
-        launchWebsite(baseUrl);
+        driver.navigate().to("http://qa.koel.app/");
+        //launchWebsite(baseUrl);
     }
     @AfterMethod
     public void tearDown(){
