@@ -80,7 +80,7 @@ public class HomePage extends BasePage {
         return notificationMsg.getText();
     }
 
-    public void renamePlayList(String oldName, String newName) {
+    public void renamePlayList(String oldName, String newName) throws InterruptedException {
         WebElement playlist = findElement(lookupPlayListByByName(oldName));
 
         contextClickThroughActions(playlist, 100);
@@ -88,7 +88,19 @@ public class HomePage extends BasePage {
         click(findElement(editBtn));
 
         WebElement playlistNameField = findElement(playlistName);
-        playlistNameField.sendKeys(Keys.HOME, Keys.chord(Keys.SHIFT, Keys.END), newName);
+
+        // hacking the removal of the old value for firefox
+        String browser = System.getProperty("browser");
+        switch (browser) {
+            case "grid-firefox", "firefox":
+                for (int i = 0; i < oldName.length(); i++)
+                    playlistNameField.sendKeys(Keys.BACK_SPACE);
+                playlistNameField.sendKeys(newName);
+                break;
+            default:
+                playlistNameField.sendKeys(Keys.HOME, Keys.chord(Keys.SHIFT, Keys.END), newName);
+        }
+
         playlistNameField.sendKeys(Keys.ENTER);
     }
 

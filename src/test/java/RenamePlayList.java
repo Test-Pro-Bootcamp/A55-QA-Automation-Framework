@@ -3,6 +3,8 @@ import org.testng.annotations.*;
 import pages.HomePage;
 import pages.LoginPage;
 
+import java.net.MalformedURLException;
+
 public class RenamePlayList extends BaseTest {
 
     private LoginPage loginPage;
@@ -11,7 +13,7 @@ public class RenamePlayList extends BaseTest {
 
     @BeforeSuite
     @Parameters({"BaseURL", "Email", "Password"})
-    void beforeSuite(String baseURL, String email, String password) {
+    void beforeSuite(String baseURL, String email, String password) throws MalformedURLException {
         initChromeDriver();
 
         loginPage = new LoginPage(driver);
@@ -28,7 +30,7 @@ public class RenamePlayList extends BaseTest {
 
     @Test
     @Parameters({"PlayList"})
-    public void renamingPlayListTest(String playlist) {
+    public void renamingPlayListTest(String playlist) throws InterruptedException {
         homePage.clickPlusButton()
                 .clickNewPlayList()
                 .enterPlaylistName(playlist);

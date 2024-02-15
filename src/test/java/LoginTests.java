@@ -6,6 +6,8 @@ import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.LoginPage;
 
+import java.net.MalformedURLException;
+
 
 public class LoginTests extends BaseTest {
 
@@ -14,7 +16,7 @@ public class LoginTests extends BaseTest {
     private HomePage homePage;
 
     @BeforeSuite
-    void beforeSuite() {
+    void beforeSuite() throws MalformedURLException {
         initChromeDriver();
 
         loginPage = new LoginPage(driver);
