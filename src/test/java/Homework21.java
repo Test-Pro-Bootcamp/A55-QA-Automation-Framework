@@ -38,9 +38,7 @@ public class BaseTest {
 
 
     @BeforeSuite
-    static void setupClass() {
-        WebDriverManager.chromedriver().setup();
-    }
+    static void setupClass() { WebDriverManager.chromedriver().setup();}
 
     @BeforeMethod
     @Parameters ({"BaseURL"})
@@ -52,7 +50,7 @@ public class BaseTest {
         //Implicit Wait
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         //Explicit Wait
-        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         //Fluent Wait
         fluentWait = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(5)).pollingEvery(Duration.ofSeconds(1));
         driver.manage().window().maximize();
@@ -61,15 +59,14 @@ public class BaseTest {
     }
 
     @AfterMethod
-    public void closeBrowser() {
-        driver.quit();
+    public void closeBrowser() {driver.quit();
     }
 
     //Helper Methods
 
     public void logintoKoel() {
         //WebElement loginBtn = driver.findElement(By.cssSelector("button[type='submit']"));
-         WebElement loginBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(("button[type='submit']")));
+        WebElement loginBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(("button[type='submit']")));
         loginBtn.click();
         //Thread.sleep(5000);
     }
@@ -90,10 +87,6 @@ public class BaseTest {
 
     public void navigateToPage(String url) {
         driver.get(url);
-    }
-
-    public void chooseAllSongsList() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("li a.songs"))).click();
     }
 
 }
