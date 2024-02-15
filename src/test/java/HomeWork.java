@@ -6,26 +6,30 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class homeWork extends BaseTest{
+import java.time.Duration;
+import java.util.concurrent.TimeUnit;
+
+public class HomeWork extends BaseTest{
 
     @Test
-    public void renameSmartPlaylist() throws InterruptedException {
+    public void renameSmartPlaylist(){
         //Step1: login to the website.
         enterEmail("nayana.rao.subramanya@testpro.io");
         enterPassword("Zqmvyk4hDaZ3vga");
         loginButton();
-        Thread.sleep(2000);
         Actions action = new Actions(driver);
+
+        WebElement avatar = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[class=\"avatar\"]")));
+        Assert.assertTrue(avatar.isDisplayed());
 
         WebElement playlistSmart = driver.findElement(By.xpath("//*[@id=\"playlists\"]//a[contains(@href,'70585')]"));
         //Step2: Navigate to the chosen playlist using xpath //*[@id="playlists"]//a[contains(@href,'70585')]
         //Step3: Right click on the chosen playlist using actions
         action.moveToElement(playlistSmart).contextClick(playlistSmart).build().perform();
-        Thread.sleep(1500);
         //Step4: Choose the edit option using locator [data-testid="playlist-context-menu-edit-70585"]
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//section[@id='playlists']/ul/li[3]/nav[@class='menu playlist-item-menu']/ul/li[1]")));
         WebElement editButton = driver.findElement(By.xpath("//section[@id='playlists']/ul/li[3]/nav[@class='menu playlist-item-menu']/ul/li[1]"));
         editButton.click();
-        Thread.sleep(2000);
         //Step5: Click on the name field using locator [name="name"]
         WebElement nameField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[name=\"name\"]")));
         nameField.click();
@@ -42,7 +46,7 @@ public class homeWork extends BaseTest{
         Assert.assertEquals(successMessage.getText(),"Updated playlist \"New Smart.\"" );
     }
     @Test
-    public void renamePlaylist() throws InterruptedException {
+    public void renamePlaylist(){
         //Step1: login to the website.
         enterEmail("nayana.rao.subramanya@testpro.io");
         enterPassword("Zqmvyk4hDaZ3vga");
@@ -53,7 +57,7 @@ public class homeWork extends BaseTest{
         wait.until(ExpectedConditions.visibilityOf(chosenPlaylist)).click();
         //Step3: Right-click on the chosen playlist using actions
         action.moveToElement(chosenPlaylist).doubleClick(chosenPlaylist).build().perform();
-        Thread.sleep(2000);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("input[type='text']")));
         //Step4: Choose the edit option using locator
         /*WebElement editButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//section[@id='playlists']/ul/li[5]//li[1]")));
         wait.until(ExpectedConditions.elementToBeClickable(editButton)).click();
