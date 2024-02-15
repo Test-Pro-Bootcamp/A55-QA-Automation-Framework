@@ -1,9 +1,12 @@
+import com.google.common.cache.AbstractCache;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
@@ -12,6 +15,8 @@ import java.time.Duration;
 public class BaseTest {
 
     public WebDriver driver;
+    public WebDriverWait wait;
+    public Actions actions;
 
     @BeforeSuite
     public static void setupClass() {
@@ -26,7 +31,7 @@ public class BaseTest {
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));//5 seconds or 10 seconds?
         driver.manage().window().maximize();
-        launchWebsite(baseURL);
+        driver.navigate().to(baseURL);
     }
    /* @BeforeMethod
     public void setupPage() {
