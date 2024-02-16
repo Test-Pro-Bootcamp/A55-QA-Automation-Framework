@@ -31,6 +31,7 @@ public class BaseTest {
     @Parameters({"url"})
     public void launchBrowser(String url) {
         ChromeOptions options = new ChromeOptions();
+        //options.setCapability("browserVersion", "121.0.6167.185");
         options.addArguments("--remote-allow-origins=*");
 
         driver = new ChromeDriver(options);
@@ -44,12 +45,22 @@ public class BaseTest {
         navigateToUrl(url);
         actions = new Actions(driver);
     }
+    @BeforeMethod
+    public static ChromeDriver getChromeDriver() {
+        //ChromeOptions chromeOptions = new ChromeOptions();
+        //chromeOptions.addArguments("--start-maximized");
+        //chromeOptions.addArguments("--remote-allow-origins=*");
+        ChromeOptions chromeOptions = new ChromeOptions();
+        return new ChromeDriver(chromeOptions);
+    }
 
 
     public void navigateToUrl(String url){
         driver.get(url);
 
     }
+
+
 
     //public void provideEmail(String email){
         //WebElement emailField = driver.findElement(By.cssSelector("input[type='email']"));
