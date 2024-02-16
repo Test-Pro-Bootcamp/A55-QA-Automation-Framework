@@ -1,18 +1,18 @@
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import Pages.HomePage;
-import Pages.LoginPage;
+import pages.HomePage;
+import pages.LoginPage;
 
-public class Homework24 extends BaseTest {
+public class Homework25 extends BaseTest {
 
     String createdPlaylist = "Created playlist \"vivo.\"";
     String updatedPlaylistMsg = "Updated playlist \"VIVO.\"";
 
 
-    @Test
+    @Test(priority = 0)
     public void createPlaylist() {
-        LoginPage loginPage = new LoginPage(driver);
-        HomePage homePage = new HomePage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
 
         loginPage.logIn();
         homePage.clickPlusButton();
@@ -23,10 +23,10 @@ public class Homework24 extends BaseTest {
 
     }
 
-    @Test
-    public void renamePlaylist() {
-        LoginPage loginPage = new LoginPage(driver);
-        HomePage homePage = new HomePage(driver);
+    @Test(priority = 1)
+    public void renamePlaylist() throws InterruptedException {
+        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
 
         loginPage.logIn();
         homePage.doubleClickPlaylist();
