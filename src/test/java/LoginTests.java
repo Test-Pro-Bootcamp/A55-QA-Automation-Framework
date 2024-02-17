@@ -1,25 +1,65 @@
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import java.time.Duration;
+import pages.HomePage;
+import pages.LoginPage;
 
 public class LoginTests extends BaseTest {
     @Test
-    public void loginEmptyEmailPassword() {
+    public static void loginEmptyEmailPasswordTest() {
+        LoginPage loginPage = new LoginPage(getThreadLocal());
+        HomePage homePage = new HomePage(getThreadLocal());
 
-//      Added ChromeOptions argument below to fix websocket error
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
+        loginPage.provideEmail("")
+                .providePassword("te$t$tudent")
+                .clickBtn();
 
-        WebDriver driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        Assert.assertTrue(homePage.userAvatar().isDisplayed());
+    }
 
-        String url = "https://qa.koel.app/";
-        driver.get(url);
-        Assert.assertEquals(driver.getCurrentUrl(), url);
-        driver.quit();
+    @Test
+    public static void loginWrongPasswordTest() {
+        LoginPage loginPage = new LoginPage(getThreadLocal());
+        HomePage homePage = new HomePage(getThreadLocal());
+
+        loginPage.provideEmail("taqimed99@gmail.com")
+                .providePassword("Med-20115-010499@")
+                .clickBtn();
+
+        Assert.assertTrue(homePage.userAvatar().isDisplayed());
+    }
+
+    @Test
+    public static void loginEmptyPasswordTest() {
+        LoginPage loginPage = new LoginPage(getThreadLocal());
+        HomePage homePage = new HomePage(getThreadLocal());
+
+
+        loginPage.provideEmail("demo@class.com")
+                .providePassword("")
+                .clickBtn();
+
+        Assert.assertTrue(homePage.userAvatar().isDisplayed());
+    }
+
+    @Test
+    public static void loginWrongEmailTest() {
+        LoginPage loginPage = new LoginPage(getThreadLocal());
+        HomePage homePage = new HomePage(getThreadLocal());
+
+
+        loginPage.provideEmail("demo@class.com")
+                .providePassword("te$t$tudent")
+                .clickBtn();
+
+        Assert.assertTrue(homePage.userAvatar().isDisplayed());
+    }
+
+    @Test
+    public void loginSucceedTest() {
+        LoginPage loginPage = new LoginPage(getThreadLocal());
+        HomePage homePage = new HomePage(getThreadLocal());
+
+        loginPage.logIn();
+        Assert.assertTrue(homePage.userAvatar().isDisplayed());
     }
 }
