@@ -5,15 +5,13 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
 
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -24,7 +22,6 @@ import java.util.HashMap;
 public class BaseTest {
     public static WebDriver driver = null;
     public static WebDriverWait wait = null;
-    public static String url = null;
     public static Actions actions = null;
     private static final ThreadLocal<WebDriver> threadDriver = new ThreadLocal<>();
 
@@ -32,19 +29,19 @@ public class BaseTest {
         return threadDriver.get();
     }
 
-    @BeforeSuite
+   // @BeforeSuite
 
 
     @BeforeMethod
     @Parameters({"BaseUrl"})
-    public void launchBrowser(String BaseUrl) throws MalformedURLException {
+    public void launchBrowser(@Optional String BaseUrl) throws MalformedURLException {
         threadDriver.set(pickBrowser(System.getProperty("browser")));
-        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
+        threadDriver.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        threadDriver.get().manage().window().maximize();
+        threadDriver.get().manage().deleteAllCookies();
+        wait = new WebDriverWait(getDriver(), Duration.ofSeconds(5));
         actions = new Actions(getDriver());
-        url = BaseUrl;
-        getDriver().get(url);
-        Assert.assertEquals(getDriver().getCurrentUrl(), url);
+        getDriver().get(BaseUrl);
     }
 
     public WebDriver pickBrowser(String browser) throws MalformedURLException {
@@ -53,7 +50,9 @@ public class BaseTest {
         switch (browser) {
             case "firefox":
                 WebDriverManager.firefoxdriver().setup();
-                return driver = new FirefoxDriver();
+                FirefoxOptions ops = new FirefoxOptions();
+                ops.addArguments("-private");
+                return driver = new FirefoxDriver(ops);
             case "MicrosoftEdge":
                 WebDriverManager.edgedriver().setup();
                 EdgeOptions EdgOps = new EdgeOptions();

@@ -30,10 +30,12 @@ public class BasePage {
     }
 
     public void doubleClick(WebElement element) {
+        wait.until(ExpectedConditions.elementToBeClickable(element));
         actions.doubleClick(findElement(element)).perform();
     }
 
     public void contextClick(WebElement element) {
+        wait.until(ExpectedConditions.elementToBeClickable(element));
         actions.contextClick(findElement(element)).perform();
     }
 }

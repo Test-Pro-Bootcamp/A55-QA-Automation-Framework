@@ -10,11 +10,12 @@ public class Homework25 extends BaseTest {
 
 
     @Test(priority = 0)
-    public void createPlaylist() {
+    public void createPlaylist() throws InterruptedException {
         LoginPage loginPage = new LoginPage(getDriver());
         HomePage homePage = new HomePage(getDriver());
 
         loginPage.logIn();
+        Thread.sleep(2000);
         homePage.clickPlusButton();
         homePage.chooseNewPlaylist();
         homePage.enterPlaylistName("vivo");
@@ -24,7 +25,7 @@ public class Homework25 extends BaseTest {
     }
 
     @Test(priority = 1)
-    public void renamePlaylist() throws InterruptedException {
+    public void renamePlaylist(){
         LoginPage loginPage = new LoginPage(getDriver());
         HomePage homePage = new HomePage(getDriver());
 

@@ -17,7 +17,7 @@ public class HomePage extends BasePage {
     @FindBy(css = "[data-testid='playlist-context-menu-create-simple']")
     private WebElement newPlaylist;
 
-    @FindBy(css = "[class='fa fa-plus-circle create']")
+    @FindBy(css = "[data-testid='sidebar-create-playlist-btn']")
     private WebElement clickPlusButton1;
 
     @FindBy(css = "[name='name']")
@@ -41,17 +41,19 @@ public class HomePage extends BasePage {
     }
 
     public HomePage clickPlusButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(clickPlusButton1));
+        wait.until(ExpectedConditions.visibilityOf(clickPlusButton1));
         clickPlusButton1.click();
         return this;
     }
 
     public String playlistCreated() {
+        wait.until(ExpectedConditions.visibilityOf(notificationMsg));
         return findElement(notificationMsg).getText();
 
     }
 
     public HomePage enterPlaylistName(String newPlaylistName) {
+        wait.until(ExpectedConditions.visibilityOf(playlistNameField));
         playlistNameField.clear();
         playlistNameField.sendKeys(newPlaylistName);
         playlistNameField.sendKeys(Keys.ENTER);
@@ -59,6 +61,7 @@ public class HomePage extends BasePage {
     }
 
     public HomePage doubleClickPlaylist(){
+        wait.until(ExpectedConditions.visibilityOf(playlist));
         actions.doubleClick(findElement(playlist)).perform();
         return this;
     }
@@ -70,6 +73,7 @@ public class HomePage extends BasePage {
 
 
     public HomePage addNewNameToPlaylist() {
+        wait.until(ExpectedConditions.visibilityOf(playlistNameField));
         findElement(playlistNameField).sendKeys(Keys.chord(Keys.COMMAND, "A", Keys.BACK_SPACE));
         findElement(playlistNameField).sendKeys(newPlaylistName1);
         findElement(playlistNameField).sendKeys(Keys.ENTER);
