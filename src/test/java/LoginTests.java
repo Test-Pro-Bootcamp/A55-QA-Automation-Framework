@@ -3,7 +3,7 @@ import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.LogInPage;
 
-//login with valid email using object method
+//login with valid email using POM
 public class LoginTests extends BaseTest {
     @Test
     public void loginValidEmailPasswordTest() {

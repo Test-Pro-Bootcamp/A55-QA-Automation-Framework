@@ -5,7 +5,7 @@ import pages.LogInPage;
 
 public class ClearCurrentQueTest extends BaseTest {
     @Test
-    public void playSongFromArtistsPage() {
+    public void clearCurrentQueue() {
         //prerequisites
         LogInPage loginPage = new LogInPage(driver);
         LogInPage.provideEmail("aida.taymaskhanova@testpro.io");

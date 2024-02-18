@@ -1,4 +1,3 @@
-
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -31,7 +30,6 @@ public class BaseTest {
     @Parameters({"url"})
     public void launchBrowser(String url) {
         ChromeOptions options = new ChromeOptions();
-        //options.setCapability("browserVersion", "121.0.6167.185");
         options.addArguments("--remote-allow-origins=*");
 
         driver = new ChromeDriver(options);
@@ -45,6 +43,13 @@ public class BaseTest {
         navigateToUrl(url);
         actions = new Actions(driver);
     }
+
+
+    public void navigateToURL( String url){
+        driver.get(url);
+
+    }
+
     @BeforeMethod
     public static ChromeDriver getChromeDriver() {
         //ChromeOptions chromeOptions = new ChromeOptions();
