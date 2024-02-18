@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
@@ -20,19 +21,19 @@ public class BaseTest {
     public static Actions actions;// = null;
     public static WebDriverWait wait ;//= null;
     public String baseURL = "https://qa.koel.app/";
+
     @BeforeSuite
     static void setupClass() {
-
-        WebDriverManager.chromedriver().setup();
+        WebDriverManager.firefoxdriver().setup();
     }
 
     @BeforeMethod
     @Parameters({"url"})
     public void launchBrowser(String url) {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
-
-        driver = new ChromeDriver(options);
+        //ChromeOptions options = new ChromeOptions();
+        //options.addArguments("--remote-allow-origins=*");
+        //driver = new ChromeDriver(options);
+        driver = new FirefoxDriver();
         //implicit wait
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         //maximize window
@@ -40,7 +41,7 @@ public class BaseTest {
         //explicit wait don't forget to create an object in the beginning of the class WebDriverWait wait;
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        navigateToUrl(url);
+        navigateToURL(url);
         actions = new Actions(driver);
     }
 
@@ -50,20 +51,17 @@ public class BaseTest {
 
     }
 
-    @BeforeMethod
+   /* @BeforeMethod
     public static ChromeDriver getChromeDriver() {
         //ChromeOptions chromeOptions = new ChromeOptions();
         //chromeOptions.addArguments("--start-maximized");
         //chromeOptions.addArguments("--remote-allow-origins=*");
         ChromeOptions chromeOptions = new ChromeOptions();
         return new ChromeDriver(chromeOptions);
-    }
+    }*/
 
 
-    public void navigateToUrl(String url){
-        driver.get(url);
 
-    }
 
 
 
