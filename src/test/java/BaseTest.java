@@ -17,11 +17,13 @@ import java.time.Duration;
 import java.util.HashMap;
 
 abstract class BaseTest {
-    public WebDriver driver;
+    public ThreadLocal<WebDriver> driverThreadLocal = new ThreadLocal<>();
 
     protected void initChromeDriver() throws MalformedURLException {
-        driver = pickBrowser(System.getProperty("browser"));
+        WebDriver driver = pickBrowser(System.getProperty("browser"));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+        driverThreadLocal.set(driver);
     }
 
     private WebDriver pickBrowser(String browser) throws MalformedURLException {
@@ -44,29 +46,29 @@ abstract class BaseTest {
                 ltOptions.put("w3c", true);
                 ltOptions.put("plugin", "java-testNG");
                 browserOptions.setCapability("LT:Options", ltOptions);
-                return driver = new RemoteWebDriver(URI.create(hubUrl).toURL(), browserOptions);
+                return new RemoteWebDriver(URI.create(hubUrl).toURL(), browserOptions);
             case "grid-firefox":
                 caps.setCapability("browserName", "firefox");
-                return driver = new RemoteWebDriver(URI.create(gridUrl).toURL(), caps);
+                return new RemoteWebDriver(URI.create(gridUrl).toURL(), caps);
             case "grid-chrome":
                 caps.setCapability("browserName", "chrome");
-                return driver = new RemoteWebDriver(URI.create(gridUrl).toURL(), caps);
+                return new RemoteWebDriver(URI.create(gridUrl).toURL(), caps);
             case "grid-edge":
                 caps.setCapability("browserName", "MicrosoftEdge");
-                return driver = new RemoteWebDriver(URI.create(gridUrl).toURL(), caps);
+                return new RemoteWebDriver(URI.create(gridUrl).toURL(), caps);
             case "grid-safari":
                 caps.setCapability("browserName", "safari");
-                return driver = new RemoteWebDriver(URI.create(gridUrl).toURL(), caps);
+                return new RemoteWebDriver(URI.create(gridUrl).toURL(), caps);
 
             case "firefox":
                 WebDriverManager.firefoxdriver().setup();
                 FirefoxOptions firefoxOptions = new FirefoxOptions();
-                return driver = new FirefoxDriver(firefoxOptions);
+                return new FirefoxDriver(firefoxOptions);
             case "MicrosoftEdge":
                 WebDriverManager.edgedriver().setup();
                 EdgeOptions EdgOps = new EdgeOptions();
                 EdgOps.addArguments("--remote-allow-origins=*");
-                return driver = new EdgeDriver(EdgOps);
+                return new EdgeDriver(EdgOps);
 
 
             default:
@@ -74,12 +76,13 @@ abstract class BaseTest {
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("--remote-allow-origins=*");
                 options.addArguments("--disable-notifications");
-                return driver = new ChromeDriver(options);
+                return new ChromeDriver(options);
         }
 
     }
 
     protected void quitChromeDriver() {
-        driver.quit();
+        driverThreadLocal.get().quit();
+        driverThreadLocal.remove();
     }
 }

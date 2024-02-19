@@ -19,8 +19,8 @@ public class LoginTests extends BaseTest {
     void beforeSuite() throws MalformedURLException {
         initChromeDriver();
 
-        loginPage = new LoginPage(driver);
-        homePage = new HomePage(driver);
+        loginPage = new LoginPage(driverThreadLocal.get());
+        homePage = new HomePage(driverThreadLocal.get());
     }
 
     @AfterSuite

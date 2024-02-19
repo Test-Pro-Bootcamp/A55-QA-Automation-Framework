@@ -16,8 +16,8 @@ public class RenamePlayList extends BaseTest {
     void beforeSuite(String baseURL, String email, String password) throws MalformedURLException {
         initChromeDriver();
 
-        loginPage = new LoginPage(driver);
-        homePage = new HomePage(driver);
+        loginPage = new LoginPage(driverThreadLocal.get());
+        homePage = new HomePage(driverThreadLocal.get());
 
         loginPage.login(baseURL, email, password);
         Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
