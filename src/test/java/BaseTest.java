@@ -14,6 +14,7 @@ import org.openqa.selenium.safari.SafariOptions;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.time.Duration;
+import java.util.HashMap;
 
 abstract class BaseTest {
     public WebDriver driver;
@@ -28,6 +29,22 @@ abstract class BaseTest {
         String gridUrl = "http://192.168.178.50:4444";
 
         switch (browser){
+            case "lambda-chrome":
+                String hubUrl = "https://hub.lambdatest.com/wd/hub";
+                ChromeOptions browserOptions = new ChromeOptions();
+                browserOptions.setPlatformName("macOS Ventura");
+                browserOptions.setBrowserVersion("121.0");
+                HashMap<String, Object> ltOptions = new HashMap<String, Object>();
+                ltOptions.put("username", "ana.nicora");
+                ltOptions.put("accessKey", "3leTzgQsqFnRXwjnOxTgYKGkttlPk9abjWNwQnOHym6wQBrutf");
+                ltOptions.put("resolution", "1920x1080");
+                ltOptions.put("project", "Untitled");
+                ltOptions.put("selenium_version", "4.13.0");
+                ltOptions.put("driver_version", "121.0");
+                ltOptions.put("w3c", true);
+                ltOptions.put("plugin", "java-testNG");
+                browserOptions.setCapability("LT:Options", ltOptions);
+                return driver = new RemoteWebDriver(URI.create(hubUrl).toURL(), browserOptions);
             case "grid-firefox":
                 caps.setCapability("browserName", "firefox");
                 return driver = new RemoteWebDriver(URI.create(gridUrl).toURL(), caps);
