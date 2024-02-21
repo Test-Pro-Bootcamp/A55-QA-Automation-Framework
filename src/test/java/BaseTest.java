@@ -28,20 +28,10 @@ public class BaseTest {
     public static String url = null;
     public static Actions actions = null;
 
-    @BeforeSuite
-    // static void setupClass() {
-    // WebDriverManager.chromedriver().setup();
-    //
-    // }
 
     @BeforeMethod
     @Parameters({"BaseUrl"})
     public void launchBrowser(String BaseUrl) throws MalformedURLException {
-        // ChromeOptions options = new ChromeOptions();
-        // options.addArguments("--remote-allow-origins=*");
-
-        //options.addArguments("--disable-notifications");
-        // driver = new ChromeDriver(options);
         driver = pickBrowser(System.getProperty("browser"));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
