@@ -4,11 +4,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.HomePage;
+import pages.LoginPage;
 
 import java.util.List;
 
 public class HomeTest extends BaseTest{
-    String newPlaylistName = "Sample Playlist";
+
+
 
     @Test
     public void hoverOverPlayBtn() throws InterruptedException {
@@ -72,35 +75,33 @@ public class HomeTest extends BaseTest{
     public void renamePlaylist() throws InterruptedException {
 
         String updatedPlaylistSuccessMsg = "Updated playlist \"Sample Playlist.\"";
-        provideEmail("kaflimeerim@gmail.com");
-        providePassword("te$t$tudent");
-        loginToKoel();
-        Thread.sleep(2000);
-        //double click playlist;
-        doubleClickPlaylist();
-        Thread.sleep(2000);
-        //enter new name;
-        enterNewName();
-        //Assertions;
-        Assert.assertEquals(getRenamePlaylistSuccessMsg(),updatedPlaylistSuccessMsg);
 
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
+
+        loginPage.login();
+        homePage.doubleClickPlaylist();
+        homePage.enterNewName();
+        //Assertions;
+        Assert.assertEquals(homePage.getRenamePlaylistSuccessMsg(), updatedPlaylistSuccessMsg);
 
     }
+    }
 
-    public String getRenamePlaylistSuccessMsg(){
+   /* public String getRenamePlaylistSuccessMsg(){
         WebElement notification =wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
         return notification.getText();
     }
 
-    public void enterNewName() {
+    /*public void enterNewName() {
         WebElement playlistInputField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[name='name']")));
         playlistInputField.sendKeys(Keys.chord(Keys.CONTROL,"A",Keys.BACK_SPACE));
         playlistInputField.sendKeys(newPlaylistName);
         playlistInputField.sendKeys(Keys.ENTER);
     }
 
-    public void doubleClickPlaylist() {
+   /* public void doubleClickPlaylist() {
         WebElement playlistElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".playlist:nth-child(3)")));
         actions.doubleClick(playlistElement).perform();
     }
-}
+}*/
