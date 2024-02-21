@@ -22,7 +22,9 @@ public class BaseTest {
     public String baseURL = "https://qa.koel.app/";
     @BeforeSuite
     static void setupClass() {
-        //WebDriverManager.firefoxdriver().setup();
+        WebDriverManager.firefoxdriver().setup();
+        WebDriverManager.chromedriver().setup();
+        WebDriverManager.edgedriver().setup();
     }
     @BeforeMethod
     @Parameters({"url"})
