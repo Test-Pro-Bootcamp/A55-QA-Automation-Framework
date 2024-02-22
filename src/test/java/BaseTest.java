@@ -6,6 +6,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -29,7 +30,7 @@ public class BaseTest {
         return threadDriver.get();
     }
 
-   // @BeforeSuite
+    // @BeforeSuite
 
 
     @BeforeMethod
@@ -80,23 +81,18 @@ public class BaseTest {
     }
 
     public WebDriver lambdaTest() throws MalformedURLException {
-        String hub = "@hub.lambdatest.com/wd/hub";
-        String name = "taqimed99";
-        String accessKey = "4pgzKgaVZzOS73tKVr8OmRqfKbWP14B21ArvrmZlll7yLKrab3";
-
-        DesiredCapabilities caps = new DesiredCapabilities();
+        String hubURL = "https://hub.lambdatest.com/wd/hub";
         ChromeOptions browserOptions = new ChromeOptions();
         browserOptions.setPlatformName("Windows 10");
         browserOptions.setBrowserVersion("121.0");
         HashMap<String, Object> ltOptions = new HashMap<String, Object>();
         ltOptions.put("username", "taqimed99");
         ltOptions.put("accessKey", "4pgzKgaVZzOS73tKVr8OmRqfKbWP14B21ArvrmZlll7yLKrab3");
-        ltOptions.put("resolution", "1920x1080");
         ltOptions.put("project", "Untitled");
         ltOptions.put("w3c", true);
         ltOptions.put("plugin", "java-testNG");
         browserOptions.setCapability("LT:Options", ltOptions);
-        return new RemoteWebDriver(new URL("https://" + name + ":" + accessKey + hub), caps);
+        return new RemoteWebDriver(new URL(hubURL), browserOptions);
     }
 
     @AfterMethod
