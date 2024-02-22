@@ -3,7 +3,7 @@ import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.LoginPage;
 
-public class Homework25 extends BaseTest {
+public class Homework26 extends BaseTest {
 
     String createdPlaylist = "Created playlist \"vivo.\"";
     String updatedPlaylistMsg = "Updated playlist \"VIVO.\"";
