@@ -15,8 +15,8 @@ public class HomeWork extends BaseTest{
         avatarIsDisplayed();
 
         WebElement playlistSmart = driver.findElement(By.xpath("//*[@id=\"playlists\"]//a[contains(@href,'70585')]"));
-
-        actions.moveToElement(playlistSmart).contextClick(playlistSmart).build().perform();
+        actions.moveToElement(playlistSmart).perform();
+        actions.contextClick(playlistSmart).build().perform();
         editButtonClick();
         renameTheSmartPlaylist();
         //Step: Click on the Save button using xpath //div[@class="smart-playlist-form"]//footer/button[@type="submit"]
