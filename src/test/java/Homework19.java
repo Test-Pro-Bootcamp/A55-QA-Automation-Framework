@@ -4,24 +4,38 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.BasePage;
+import pages.HomePage;
+import pages.LoginPage;
 
 public class Homework19 extends BaseTest{
 
     @Test
     public void deletePlaylist() throws InterruptedException {
-        String deletedPlaylistSuccessMessage = "Deleted playlist \"Oreo.\"";
+
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
+        loginPage.login();
+        homePage.selectPlaylist();
+        homePage.clickDeletePlaylistBtn();
+        homePage.getPlaylistDeletedMessage();
+
+       // Assert.assertEquals(getPlaylistDeletedMessage(),deletedPlaylistSuccessMessage);
+        Assert.assertTrue(homePage.getPlaylistDeletedMessage().
+
+                /*String deletedPlaylistSuccessMessage = "Deleted playlist \"Oreo.\"";
         provideEmail("kaflimeerim@gmail.com");
         providePassword("te$t$tudent");
         loginToKoel();
         selectPlaylist();
-        //Thread.sleep(2000);
+        Thread.sleep(2000);
         clickDeletePlaylistBtn();
-        //Thread.sleep(2000);
+        Thread.sleep(2000);
         Assert.assertEquals(getPlaylistDeletedMessage(),deletedPlaylistSuccessMessage);
-       // Assert.assertTrue(wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show"))).isDisplayed();
+        Assert.assertTrue(wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show"))).isDisplayed();
 
 
-    }
+
     public String getPlaylistDeletedMessage(){
        // WebElement notification = driver.findElement(By.cssSelector("div.success.show"));
         WebElement notification = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
@@ -40,5 +54,10 @@ public class Homework19 extends BaseTest{
         //WebElement playlistName = driver.findElement(By.xpath("//a[contains(text(),'Oreo')]"));/
         WebElement playlistName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(),'Oreo')]")));
         playlistName.click();
+
+
     }
+}*/
 }
+}
+

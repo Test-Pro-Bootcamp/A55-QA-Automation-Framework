@@ -1,5 +1,5 @@
+
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.asynchttpclient.request.body.multipart.StringPart;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -34,8 +34,7 @@ public class BaseTest {
     */
 
     @BeforeSuite
-
-    static void setupClass() {
+    void setupClass(){
         WebDriverManager.chromedriver().setup();
     }
 

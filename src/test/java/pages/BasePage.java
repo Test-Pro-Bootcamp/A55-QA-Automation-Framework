@@ -19,25 +19,25 @@ public class BasePage {
 
     Actions actions;
 
-    public BasePage(WebDriver givenDriver){
+    public BasePage(WebDriver givenDriver) {
         driver = givenDriver;
-        wait = new WebDriverWait(driver,Duration.ofSeconds(5));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         actions = new Actions(driver);
-        PageFactory.initElements(driver,this);
+        PageFactory.initElements(driver, this);
 
     }
-      // WEb Elements
+    // WEb Elements
 
     // Using Page Factory;
     @FindBy(css = "[type='email']")
-     WebElement emailField;
+    WebElement emailField;
     @FindBy(css = "[type='password']")
     WebElement passwordField;
-    @FindBy(css = "[type-'submit']")
+    @FindBy(css = "[type='submit']")
     WebElement submitBtn;
     By soundBarVisualizer = By.cssSelector("[data-testid= 'sound-bar-play']");
 
-    public WebElement findElement(By locator){
+    public WebElement findElement(By locator) {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
 
     }
@@ -57,22 +57,30 @@ public class BasePage {
         clickSubmit();
     }*/
 
-    public BasePage provideEmail(String email){
+    public BasePage provideEmail(String email) {
         emailField.sendKeys(email);
         return this;
 
     }
-    public BasePage providePassword(String password){
+
+    public BasePage providePassword(String password) {
         passwordField.sendKeys(password);
         return this;
     }
-    public void clickSubmit(){
+
+    public void clickSubmit() {
         submitBtn.click();
     }
 
-    public boolean isSongPlaying(){
-       // WebElement soundBarVisualizer = wait
-              //  .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[data-testid= 'sound-bar-play']")));
+    public boolean isSongPlaying() {
+        // WebElement soundBarVisualizer = wait
+        //  .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[data-testid= 'sound-bar-play']")));
         return findElement(soundBarVisualizer).isDisplayed();
+    }
+
+    public void login() {
+        provideEmail("kaflimeerim@gmail.com");
+        providePassword("te$t$tudent");
+        clickSubmit();
     }
 }

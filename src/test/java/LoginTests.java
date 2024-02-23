@@ -72,7 +72,6 @@ public class LoginTests extends BaseTest {
 
      }
 
-
    /* @Test
     public void loginInvalidEmailValidPassword() {
         //  navigateToPage();
@@ -102,6 +101,4 @@ public class LoginTests extends BaseTest {
         // driver.quit();
 
     }*/
-
-
 }
