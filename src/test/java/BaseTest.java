@@ -1,5 +1,6 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -85,5 +86,20 @@ public class BaseTest {
     public void successMessageSmartPlaylistIsDisplayed(){
         WebElement successMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class=\"alertify-logs top right\"]/div[@class='success show']")));
         Assert.assertEquals(successMessage.getText(),"Updated playlist \"New Smart.\"" );
+    }
+    public void renamePlaylistAction(){
+        //Step: Navigate to the chosen playlist using xpath
+        WebElement chosenPlaylist = driver.findElement(By.xpath("//section[@id='playlists']/ul//a[@href='#!/playlist/87052']"));
+        wait.until(ExpectedConditions.visibilityOf(chosenPlaylist)).click();
+        //Step: Right-click on the chosen playlist using actions
+        actions.moveToElement(chosenPlaylist).doubleClick(chosenPlaylist).build().perform();
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("input[type='text']")));
+        WebElement playlistNewNameField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//section[@id='playlists']/ul/li[@class='playlist playlist editing']/input[@type='text']")));
+        actions.moveToElement(chosenPlaylist).doubleClick(playlistNewNameField).sendKeys(Keys.BACK_SPACE);
+        playlistNewNameField.sendKeys(Keys.chord(Keys.CONTROL,"a"),Keys.BACK_SPACE);
+        //Step: Enter the new name
+        playlistNewNameField.sendKeys("New name");
+        //Step: Press the enter key
+        playlistNewNameField.sendKeys(Keys.RETURN);
     }
 }
