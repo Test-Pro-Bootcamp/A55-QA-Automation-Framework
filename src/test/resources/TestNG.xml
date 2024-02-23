@@ -6,7 +6,15 @@
     <test name="Example Test" preserve-order="false">
     <parameter name="url" value="https://qa.koel.app/"/>
         <classes>
-            <class name="LoginTests"/>
+            <class name="LoginTests">
+               <methods>
+                  <include name="loginValidEmailPasswordTest"></include>
+                  <include name="loginInvalidEmailValidPasswordTest"></include>
+                  <include name="loginEmptyEmailAndPasswordTest"></include>
+                  <include name="loginEmptyEmailValidPasswordTest "></include>
+              </methods>
+            </class>
+
             <class name="BaseTest"/>
         </classes>
     </test>
