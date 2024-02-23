@@ -40,9 +40,9 @@ public class LogInPage extends BasePage{
         //findElement(submitButton).click();
     }
 
-    public void login(){
-        provideEmail("aida.taymaskhanova@testpro.io");
-        providePassword("Ozzikpozzik18");
-        clickSubmit();
-    }
+    //public void login(){
+        //provideEmail("aida.taymaskhanova@testpro.io");
+        //providePassword("Ozzikpozzik18");
+        //clickSubmit();
+    //}
 }

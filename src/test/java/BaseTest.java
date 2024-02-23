@@ -1,4 +1,5 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
+import net.bytebuddy.description.annotation.AnnotationList;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,6 +11,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -21,10 +23,18 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.time.Duration;
 public class BaseTest {
+    public static final ThreadLocal <WebDriver> threadDriver = new ThreadLocal<>();//creating a thread driver for grid parallel execution
     public static WebDriver driver;//= null ;public static String url = null;
     public static Actions actions;// = null;
     public static WebDriverWait wait ;//= null;
     public String baseURL = "https://qa.koel.app/";
+    //public Wait<WebDriver> fluentWait;
+
+    //creating a method for threadDriver for selenium parallel testing
+    public static WebDriver getDriver(){
+        return threadDriver.get();
+    }
+
     @BeforeSuite
     static void setupClass() {
         //WebDriverManager.firefoxdriver().setup();
@@ -33,14 +43,14 @@ public class BaseTest {
     @BeforeMethod
     @Parameters({"url"})
     public void launchBrowser(String url) throws MalformedURLException {
-        driver = pickBrowser(System.getProperty("browser"));
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        //maximize window
-        driver.manage().window().maximize();
+        threadDriver.set(pickBrowser(System.getProperty("browser")));//this line is added for selenium grid parallel testing
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));//line for selenium grid parallel testing
+        getDriver().manage().window().maximize();
+        //replacing driver with getDriver() where there was driver
         //explicit wait don't forget to create an object in the beginning of the class WebDriverWait wait;
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
         navigateToURL(url);
-        actions = new Actions(driver);
+        actions = new Actions(getDriver());
     }
     public static WebDriver pickBrowser(String browser) throws MalformedURLException {
         DesiredCapabilities caps = new DesiredCapabilities();
@@ -72,10 +82,16 @@ public class BaseTest {
         }
     }
     public void navigateToURL( String url){
-        driver.get(url);
+        getDriver().get(url);
     }
     @AfterMethod
-    public void closeBrowser(){
-        driver.quit();
+    public void tearDown(){ //these lines are added for selenium grid parallel testing
+        threadDriver.get().close();
+        threadDriver.remove();
     }
+
+   // @AfterMethod
+   // public void closeBrowser(){
+       // driver.quit();
+   // }
 }
