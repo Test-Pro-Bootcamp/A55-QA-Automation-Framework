@@ -1,4 +1,3 @@
-import com.google.common.cache.AbstractCache;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -44,7 +43,6 @@ public class BaseTest {
     public void tearDown() {
         driver.quit();
     }
-
     public void enterEmail(){
         WebElement emailField = driver.findElement(By.cssSelector("[type=\"email\"]"));
         emailField.sendKeys("nayana.rao.subramanya@testpro.io");

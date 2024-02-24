@@ -1,34 +1,25 @@
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.LoginPage;
 
-
+/*
+*
+* Login Page variables table:
+* Email     Password
+*
+* Valid     Valid
+* Invalid   Valid
+* Valid     Invalid
+* Invalid   Invalid
+* Empty     Valid
+* Empty     Invalid
+* Valid     Empty
+* Invalid   Empty
+* Empty     Empty
+*
+* */
 public class LoginTests extends BaseTest {
-    @Test
-    public void successfulLogin(){
-        //Step1: Enter a valid registered email
-        WebElement email = driver.findElement(By.cssSelector("[type='email']"));
-        email.clear();
-        email.sendKeys("nayana.rao.subramanya@testpro.io");
-
-        //Step2: Enter a valid corresponding password
-        WebElement passwordField = driver.findElement(By.cssSelector("[type='password']"));
-        passwordField.clear();
-        passwordField.sendKeys("Zqmvyk4hDaZ3vga");
-
-        //Step3: Click on Login button
-        WebElement loginButton = driver.findElement(By.cssSelector("[type=\"submit\"]"));
-        loginButton.click();
-
-        //Step4: Assert/Check to see the avatar is displayed
-        WebElement avatarIcon = driver.findElement(By.cssSelector("[class=\"avatar\"]"));
-        boolean avatarPresent = avatarIcon.isDisplayed();
-        Assert.assertTrue(avatarPresent,"The login is not successful");
-    }
-
     @Test
     public void loginValidEmailValidPassword(){
         LoginPage loginPage = new LoginPage(driver);
@@ -67,6 +58,59 @@ public class LoginTests extends BaseTest {
 
         loginPage.provideEmail("");
         loginPage.providePassword("Zqmvyk4hDaZ3vga");
+        loginPage.clickLogin();
+
+        Assert.assertTrue(loginPage.koelLogo().isDisplayed());
+    }
+    @Test
+    public void emptyEmailemptyPassword(){
+        LoginPage loginPage = new LoginPage(driver);
+
+        loginPage.provideEmail("");
+        loginPage.providePassword("");
+        loginPage.clickLogin();
+
+        Assert.assertTrue(loginPage.koelLogo().isDisplayed());
+    }
+
+    @Test
+    public void validEmailEmptyPassword(){
+        LoginPage loginPage = new LoginPage(driver);
+
+        loginPage.provideEmail("nayana.rao.subramanya@testpro.io");
+        loginPage.providePassword("");
+        loginPage.clickLogin();
+
+        Assert.assertTrue(loginPage.koelLogo().isDisplayed());
+    }
+
+    @Test
+    public void InvalidEmailEmptyPass(){
+        LoginPage loginPage = new LoginPage(driver);
+
+        loginPage.provideEmail("kdnbdskfjbdakf@testpro.io");
+        loginPage.providePassword("");
+        loginPage.clickLogin();
+
+        Assert.assertTrue(loginPage.koelLogo().isDisplayed());
+    }
+
+    @Test
+    public void EmptyEmailInvalidPass(){
+        LoginPage loginPage = new LoginPage(driver);
+
+        loginPage.provideEmail("");
+        loginPage.providePassword("anhvdhg");
+        loginPage.clickLogin();
+
+        Assert.assertTrue(loginPage.koelLogo().isDisplayed());
+    }
+    @Test
+    public void InvalidEmailInvalidPass(){
+        LoginPage loginPage = new LoginPage(driver);
+
+        loginPage.provideEmail("bdkjeqbfkjdbnsk@gmail.com");
+        loginPage.providePassword("sbcjsabjd");
         loginPage.clickLogin();
 
         Assert.assertTrue(loginPage.koelLogo().isDisplayed());

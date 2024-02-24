@@ -11,11 +11,8 @@ public class LoginPage extends BasePage{
         super(givenDriver);
     }
     //WebElement
-        By emailField = By.cssSelector("[type=\"email\"]");
-        By passwordField = By.cssSelector("[type=\"password\"]");
-        By submitBtn = By.cssSelector("[type=\"submit\"]");
-        By avatar = By.cssSelector("[class=\"avatar\"]");
-        By koelsym = By.cssSelector("[class=\"logo\"]");
+        private By avatar = By.cssSelector("[class=\"avatar\"]");
+        private By koelsym = By.cssSelector("[class=\"logo\"]");
 
         public void provideEmail(String email){
             findElement(emailField).sendKeys(email);
@@ -32,10 +29,5 @@ public class LoginPage extends BasePage{
 
         public WebElement koelLogo(){
             return findElement(koelsym);
-        }
-        public void loginValid(){
-            provideEmail("nayana.rao.subramanya@testpro.io");
-            providePassword("Zqmvyk4hDaZ3vga");
-            clickLogin();
         }
 }

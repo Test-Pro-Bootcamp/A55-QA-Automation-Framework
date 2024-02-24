@@ -32,6 +32,5 @@ public class RegistrationTests extends BaseTest{
 
         //Step4: Assert that the message text is displayed using contains()
         successfulRegistrationMessage();
-
     }
 }

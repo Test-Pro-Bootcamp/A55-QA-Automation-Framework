@@ -12,9 +12,13 @@ import java.time.Duration;
 
 public class BasePage {
 
-    public WebDriver driver;
-    public WebDriverWait wait;
-    public Actions actions;
+    protected WebDriver driver;
+    protected WebDriverWait wait;
+    protected Actions actions;
+
+    protected By emailField = By.cssSelector("[type=\"email\"]");
+    protected By passwordField = By.cssSelector("[type=\"password\"]");
+    protected By submitBtn = By.cssSelector("[type=\"submit\"]");
     public BasePage(WebDriver givenDriver){
         driver = givenDriver;
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
