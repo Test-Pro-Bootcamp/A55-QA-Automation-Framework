@@ -46,7 +46,7 @@ public class HomePage extends BasePage {
         return this;
     }
 
-    public HomePage clickPlusButton() {
+    public HomePage clickPlusButton(){
         wait.until(ExpectedConditions.visibilityOf(clickPlusButton1));
         clickPlusButton1.click();
         return this;
