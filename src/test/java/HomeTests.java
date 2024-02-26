@@ -3,10 +3,11 @@ import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.LoginPage;
 
-public class Homework26 extends BaseTest {
+public class HomeTests extends BaseTest {
 
     String createdPlaylist = "Created playlist \"vivo.\"";
     String updatedPlaylistMsg = "Updated playlist \"VIVO.\"";
+    String deletedPlaylistMsg = "Deleted playlist \"VIVO.\"";
 
 
     @Test(priority = 0)
@@ -25,7 +26,7 @@ public class Homework26 extends BaseTest {
     }
 
     @Test(priority = 1)
-    public void renamePlaylist(){
+    public void renamePlaylist() {
         LoginPage loginPage = new LoginPage(getDriver());
         HomePage homePage = new HomePage(getDriver());
 
@@ -34,6 +35,17 @@ public class Homework26 extends BaseTest {
         homePage.addNewNameToPlaylist();
         Assert.assertEquals(homePage.playlistMsgSuccess(), updatedPlaylistMsg);
 
+    }
+
+    @Test(priority = 2)
+    public void deletePlaylist() {
+        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
+
+        loginPage.logIn();
+        homePage.choosePlaylist();
+        homePage.clickRedButton();
+        Assert.assertEquals(homePage.playlistDeletedNotification(), deletedPlaylistMsg);
     }
 
 }

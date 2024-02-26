@@ -25,6 +25,12 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//section[@id='playlists']//li//a[contains(text(),'vivo')]")
     private WebElement playlist;
 
+    @FindBy(xpath = "//section[@id='playlists']//li//a[contains(text(),'VIVO')]")
+    private WebElement playlistToBeDeleted;
+
+    @FindBy(css = "[class='del btn-delete-playlist']")
+    private WebElement deleteButton;
+
 
     public HomePage(WebDriver givenDriver) {
         super(givenDriver);
@@ -60,7 +66,7 @@ public class HomePage extends BasePage {
         return this;
     }
 
-    public HomePage doubleClickPlaylist(){
+    public HomePage doubleClickPlaylist() {
         wait.until(ExpectedConditions.visibilityOf(playlist));
         actions.doubleClick(findElement(playlist)).perform();
         return this;
@@ -78,6 +84,21 @@ public class HomePage extends BasePage {
         findElement(playlistNameField).sendKeys(newPlaylistName1);
         findElement(playlistNameField).sendKeys(Keys.ENTER);
         return this;
+    }
+
+    public HomePage choosePlaylist() {
+        wait.until(ExpectedConditions.visibilityOf(playlistToBeDeleted)).click();
+        return this;
+    }
+
+    public HomePage clickRedButton() {
+        wait.until(ExpectedConditions.visibilityOf(deleteButton)).click();
+        return this;
+    }
+
+    public String playlistDeletedNotification() {
+        wait.until(ExpectedConditions.visibilityOf(notificationMsg));
+        return notificationMsg.getText();
     }
 }
 
