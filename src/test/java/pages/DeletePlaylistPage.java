@@ -5,9 +5,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
-public class HomeWorkPage extends BasePage {
+public class DeletePlaylistPage extends BasePage {
 
-    public HomeWorkPage(WebDriver givenDriver) {
+    public DeletePlaylistPage(WebDriver givenDriver) {
         super(givenDriver);
     }
 
