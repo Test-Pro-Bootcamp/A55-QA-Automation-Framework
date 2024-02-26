@@ -61,13 +61,14 @@ public class LoginTests extends BaseTest {
 
     //Login with Valid Email,Password using Page Object Model;
     @Test
-     public void loginValidEmailValidPasswordTest(){
+     public void loginValidEmailValidPasswordTest() throws InterruptedException {
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
 
         loginPage.provideEmail("kaflimeerim@gmail.com");
         loginPage.providePassword("te$t$tudent");
         loginPage.clickSubmit();
+        Thread.sleep(2000);
         Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
 
      }

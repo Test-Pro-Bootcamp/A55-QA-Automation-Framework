@@ -70,10 +70,10 @@ public class HomePage extends BasePage {
         deletePlaylistBtn.click();
     }
 
-    public String getPlaylistDeletedMessage() {
+    public boolean getPlaylistDeletedMessage() {
         // WebElement notification = driver.findElement(By.cssSelector("div.success.show"));
         WebElement notification = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
-        return notification.getText();
+        return notification.isDisplayed();
     }
 
 }

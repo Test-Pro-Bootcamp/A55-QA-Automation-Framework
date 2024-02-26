@@ -1,7 +1,4 @@
-import com.beust.jcommander.Parameter;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.BasePage;
@@ -21,7 +18,7 @@ public class Homework19 extends BaseTest{
         homePage.getPlaylistDeletedMessage();
 
        // Assert.assertEquals(getPlaylistDeletedMessage(),deletedPlaylistSuccessMessage);
-        Assert.assertTrue(homePage.getPlaylistDeletedMessage().
+        Assert.assertTrue(homePage.getPlaylistDeletedMessage());
 
                 /*String deletedPlaylistSuccessMessage = "Deleted playlist \"Oreo.\"";
         provideEmail("kaflimeerim@gmail.com");
