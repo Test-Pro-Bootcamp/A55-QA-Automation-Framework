@@ -10,6 +10,7 @@
             <class name="RegistrationTests"/>
             <class name="DeletePlaylist"/>
             <class name="PlaySongTest"/>
+            <class name="HomeWorkTest"/>
         </classes>
     </test>
 </suite>

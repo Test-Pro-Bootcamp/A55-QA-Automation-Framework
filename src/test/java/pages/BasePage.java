@@ -5,6 +5,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -25,10 +27,13 @@ public class BasePage {
     protected By naviagateToHomePage = By.cssSelector("[href=\"#!/home\"]");
     protected By CurrentQueuePage = By.cssSelector("[href=\"#!/queue\"]");
 
+    protected By pauseBtn = By.cssSelector("[data-testid=\"pause-btn\"]");
+
     public BasePage(WebDriver givenDriver){
         driver = givenDriver;
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         actions = new Actions(driver);
+        PageFactory.initElements(driver,this);
     }
 
     public WebElement findElement(By locator){
@@ -49,9 +54,8 @@ public class BasePage {
     }
 
     public void isSongPlaying(){
-        String firstSong = "M33 Project - Emotional Soundtrack";
-        WebElement songPlaying = findElement(progressPaneSong);
-        Assert.assertEquals(songPlaying.getText(),firstSong);
+        WebElement pauseButton = findElement(pauseBtn);
+        Assert.assertTrue(pauseButton.isDisplayed());
     }
 
 }
