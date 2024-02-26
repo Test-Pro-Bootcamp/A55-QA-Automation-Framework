@@ -1,25 +1,120 @@
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.LoginPage;
 
-import java.time.Duration;
-
+/*
+*
+* Login Page variables table:
+* Email     Password
+*
+* Valid     Valid
+* Invalid   Valid
+* Valid     Invalid
+* Invalid   Invalid
+* Empty     Valid
+* Empty     Invalid
+* Valid     Empty
+* Invalid   Empty
+* Empty     Empty
+*
+* */
 public class LoginTests extends BaseTest {
     @Test
-    public void loginEmptyEmailPassword() {
+    public void loginValidEmailValidPassword(){
+        LoginPage loginPage = new LoginPage(driver);
 
-//      Added ChromeOptions argument below to fix websocket error
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
+        loginPage.provideEmail("nayana.rao.subramanya@testpro.io");
+        loginPage.providePassword("Zqmvyk4hDaZ3vga");
+        loginPage.clickLogin();
+        Assert.assertTrue(loginPage.avatarFound().isDisplayed());
+    }
 
-        WebDriver driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+    @Test
+    public void invalidEmailValidPassword(){
+        LoginPage loginPage = new LoginPage(driver);
 
-        String url = "https://qa.koel.app/";
-        driver.get(url);
-        Assert.assertEquals(driver.getCurrentUrl(), url);
-        driver.quit();
+        loginPage.provideEmail("nayanarao.subramanya@testpro.io");
+        loginPage.providePassword("Zqmvyk4hDaZ3vga");
+        loginPage.clickLogin();
+
+        Assert.assertTrue(loginPage.koelLogo().isDisplayed());
+    }
+
+    @Test
+    public void validEmailInvalidPassword(){
+        LoginPage loginPage = new LoginPage(driver);
+
+        loginPage.provideEmail("nayana.rao.subramanya@testpro.io");
+        loginPage.providePassword("abcd1234");
+        loginPage.clickLogin();
+
+        Assert.assertTrue(loginPage.koelLogo().isDisplayed());
+    }
+
+    @Test
+    public void emptyEmailValidPassword(){
+        LoginPage loginPage = new LoginPage(driver);
+
+        loginPage.provideEmail("");
+        loginPage.providePassword("Zqmvyk4hDaZ3vga");
+        loginPage.clickLogin();
+
+        Assert.assertTrue(loginPage.koelLogo().isDisplayed());
+    }
+    @Test
+    public void emptyEmailemptyPassword(){
+        LoginPage loginPage = new LoginPage(driver);
+
+        loginPage.provideEmail("");
+        loginPage.providePassword("");
+        loginPage.clickLogin();
+
+        Assert.assertTrue(loginPage.koelLogo().isDisplayed());
+    }
+
+    @Test
+    public void validEmailEmptyPassword(){
+        LoginPage loginPage = new LoginPage(driver);
+
+        loginPage.provideEmail("nayana.rao.subramanya@testpro.io");
+        loginPage.providePassword("");
+        loginPage.clickLogin();
+
+        Assert.assertTrue(loginPage.koelLogo().isDisplayed());
+    }
+
+    @Test
+    public void InvalidEmailEmptyPass(){
+        LoginPage loginPage = new LoginPage(driver);
+
+        loginPage.provideEmail("kdnbdskfjbdakf@testpro.io");
+        loginPage.providePassword("");
+        loginPage.clickLogin();
+
+        Assert.assertTrue(loginPage.koelLogo().isDisplayed());
+    }
+
+    @Test
+    public void EmptyEmailInvalidPass(){
+        LoginPage loginPage = new LoginPage(driver);
+
+        loginPage.provideEmail("");
+        loginPage.providePassword("anhvdhg");
+        loginPage.clickLogin();
+
+        Assert.assertTrue(loginPage.koelLogo().isDisplayed());
+    }
+    @Test
+    public void InvalidEmailInvalidPass(){
+        LoginPage loginPage = new LoginPage(driver);
+
+        loginPage.provideEmail("bdkjeqbfkjdbnsk@gmail.com");
+        loginPage.providePassword("sbcjsabjd");
+        loginPage.clickLogin();
+
+        Assert.assertTrue(loginPage.koelLogo().isDisplayed());
     }
 }
+
+
