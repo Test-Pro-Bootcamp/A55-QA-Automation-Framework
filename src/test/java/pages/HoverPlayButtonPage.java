@@ -1,12 +1,13 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
-public class HomeWorkPage extends BasePage{
-    public HomeWorkPage(WebDriver givenDriver) {
+public class HoverPlayButtonPage extends BasePage{
+    public HoverPlayButtonPage(WebDriver givenDriver) {
         super(givenDriver);
     }
     //Declare Elements using Page Factory
@@ -35,8 +36,11 @@ public class HomeWorkPage extends BasePage{
     }
 
     public void hoverPlay(){
-        actions.moveToElement(playPauseBtn).build().perform();
-        Assert.assertTrue(playBtn.isDisplayed());
+        WebElement hoverLocation = driver.findElement(By.xpath("//footer/div/span[@class=\"album-thumb-wrapper\"]"));
+        actions.moveToElement(hoverLocation).build().perform();
+        WebElement playButton = playBtn;
+        Boolean playBtnDisplayed = playButton.isEnabled();
+        Assert.assertTrue(playBtnDisplayed);
     }
 
     public void playButtonClick(){

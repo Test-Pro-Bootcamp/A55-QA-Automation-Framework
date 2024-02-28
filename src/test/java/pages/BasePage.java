@@ -27,11 +27,13 @@ public class BasePage {
     protected By naviagateToHomePage = By.cssSelector("[href=\"#!/home\"]");
     protected By CurrentQueuePage = By.cssSelector("[href=\"#!/queue\"]");
 
-    protected By pauseBtn = By.cssSelector("[data-testid=\"pause-btn\"]");
+    protected By pauseBtn = By.cssSelector("[title=\"Pause\"]");
+
+    protected By progressPane = By.cssSelector("[id=\"progressPane\"]");
 
     public BasePage(WebDriver givenDriver){
         driver = givenDriver;
-        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         actions = new Actions(driver);
         PageFactory.initElements(driver,this);
     }
@@ -40,8 +42,15 @@ public class BasePage {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
+    public void login(){
+        findElement(emailField).sendKeys("nayana.rao.subramanya@testpro.io");
+        findElement(passwordField).sendKeys("Zqmvyk4hDaZ3vga");
+        findElement(submitBtn).click();
+    }
+
     public void navigateToAllSongsPage(){
         WebElement allSong = findElement(allSongsPage);
+        actions.moveToElement(allSong).build().perform();
         allSong.click();
     }
     public void naviagteToHomePage(){
@@ -54,8 +63,8 @@ public class BasePage {
     }
 
     public void isSongPlaying(){
-        WebElement pauseButton = findElement(pauseBtn);
-        Assert.assertTrue(pauseButton.isDisplayed());
+        WebElement progressBarPlaying = findElement(progressPane);
+        Assert.assertTrue(progressBarPlaying.isDisplayed());
     }
 
 }

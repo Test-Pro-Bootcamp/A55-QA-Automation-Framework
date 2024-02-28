@@ -13,8 +13,8 @@ public class PlaySongPage extends BasePage{
 
     //WebElements
 
-    private By firstSong = By.xpath("//section[@id='songsWrapper']//div//tr[1]/td[2]");
-    private By playBtn = By.cssSelector("[class=\"playback\"]");
+    protected By firstSong = By.xpath("//section[@id='songsWrapper']//div//tr[1]/td[2]");
+    protected By playBtn = By.cssSelector("[class=\"playback\"]");
 
 
     public void contextClickFirstSongAndPlay(){
