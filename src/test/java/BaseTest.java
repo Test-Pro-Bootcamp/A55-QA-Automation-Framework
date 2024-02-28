@@ -21,7 +21,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.net.MalformedURLException;
 import java.net.URI;
+import java.net.URL;
 import java.time.Duration;
+import java.util.HashMap;
+
 public class BaseTest {
     public static final ThreadLocal <WebDriver> threadDriver = new ThreadLocal<>();//creating a thread driver for grid parallel execution
     public static WebDriver driver;//= null ;public static String url = null;
@@ -73,7 +76,9 @@ public class BaseTest {
             case "grid=chrome" :
                 caps.setCapability("browserName", "chrome");
                 return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
-
+            // this line is for testing with cloud lambdaTest
+            case "cloud":
+                return LambdaTest();
             default:
                 WebDriverManager.chromedriver().setup();
                 ChromeOptions chromeOptions = new ChromeOptions();
@@ -88,6 +93,25 @@ public class BaseTest {
     public void tearDown(){ //these lines are added for selenium grid parallel testing
         threadDriver.get().close();
         threadDriver.remove();
+    }
+
+    //this method is for executing test on the clod lambdatest
+    public static WebDriver LambdaTest() throws MalformedURLException {
+        String hubURL = "https://hub.lambdatest.com/wd/hub";
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+
+        ChromeOptions browserOptions = new ChromeOptions();
+        browserOptions.setPlatformName("Windows 10");
+        browserOptions.setBrowserVersion("122.0");
+        HashMap<String, Object> ltOptions = new HashMap<String, Object>();
+        ltOptions.put("username", "aika48120");
+        ltOptions.put("accessKey", "lhbH6yUwYjtAXJ1tzarKCwSQR3Ih63fDj5AzP3dsrpZHKGLoXc");
+        ltOptions.put("project", "Untitled");
+        ltOptions.put("selenium_version", "4.0.0");
+        ltOptions.put("w3c", true);
+        browserOptions.setCapability("LT:Options", ltOptions);
+
+        return new RemoteWebDriver(new URL(hubURL), browserOptions);
     }
 
    // @AfterMethod
