@@ -20,13 +20,31 @@ import org.testng.annotations.*;
 
 import java.net.MalformedURLException;
 import java.net.URI;
+import java.net.URL;
 import java.time.Duration;
+import java.util.HashMap;
 
 public class BaseTest {
 
     public static WebDriver driver;
     public WebDriverWait wait;
     public Actions actions;
+
+    /*protected static final ThreadLocal<WebDriver> threadDriver = new ThreadLocal<>();
+
+    public static WebDriver getDriver(){
+        return threadDriver.get();
+    }
+    @BeforeMethod
+    @Parameters({"BaseURL"})
+    public void setupBrowser(String baseURL) throws MalformedURLException {
+       threadDriver.set(pickBrowser(System.getProperty("browser")));
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));//5 seconds or 10 seconds?
+        getDriver().manage().window().maximize();
+        getDriver().navigate().to(baseURL);
+        wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
+    }
+    //This is the method for parallel execution*/
 
     @BeforeSuite
     public static void setupClass() {
@@ -36,7 +54,7 @@ public class BaseTest {
         //WebDriverManager.edgedriver().setup();
     }
 
-    public static WebDriver pickBrowser(String browser) throws MalformedURLException {
+    public WebDriver pickBrowser(String browser) throws MalformedURLException {
         DesiredCapabilities caps = new DesiredCapabilities();
         String gridURL = "http://192.168.0.104:4444";
         switch(browser){
@@ -57,6 +75,8 @@ public class BaseTest {
             case "grid-chrome":
                 caps.setCapability("browserName","chrome");
                 return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
+            case "cloud":
+                return lambdaTest();
             default:
                 WebDriverManager.chromedriver().setup();
                 ChromeOptions chromeOptions = new ChromeOptions();
@@ -90,9 +110,31 @@ public class BaseTest {
 
     @AfterMethod
     public void tearDown() {
-        driver.quit();
+        //threadDriver.get().close();// Parallel execution
+        //threadDriver.remove();
+        driver.quit(); //This method is applicable to sequential execution
     }
 
+    public WebDriver lambdaTest() throws MalformedURLException{
+
+        String hubURL = "https://hub.lambdatest.com/wd/hub";
+
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        ChromeOptions browserOptions = new ChromeOptions();
+        browserOptions.setPlatformName("Windows 11");
+        browserOptions.setBrowserVersion("121.0");
+        HashMap<String, Object> ltOptions = new HashMap<>();
+        ltOptions.put("username", "nayana.rao.subramanya");
+        ltOptions.put("accessKey", "jpX7iz5JkRTDxUMAICAibQPdZDTaxNpchbGfA7epSVtAfVYy9c");
+        ltOptions.put("build", "Selenium Grid Cloud");
+        ltOptions.put("project", "Selenium Grid Cloud-25");
+        ltOptions.put("selenium_version", "4.17.0");
+        ltOptions.put("w3c", true);
+        browserOptions.setCapability("LT:Options", ltOptions);
+
+        return new RemoteWebDriver(new URL(hubURL),browserOptions);
+    }
+/*
     public void enterEmail(){
         WebElement emailField = driver.findElement(By.cssSelector("[type=\"email\"]"));
         emailField.sendKeys("nayana.rao.subramanya@testpro.io");
@@ -129,5 +171,5 @@ public class BaseTest {
     }
     public void launchWebsite(String baseURL){
         driver.get(baseURL);
-    }
+    }*/
 }
