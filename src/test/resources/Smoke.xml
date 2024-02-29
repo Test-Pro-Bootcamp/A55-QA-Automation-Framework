@@ -8,11 +8,7 @@
         <classes>
             <class name="LoginTests"/>
             <class name="BaseTest"/>
-            <!--<class name="RegistrationTests"/>
-            <class name="DeletePlaylist"/>
-            <class name="PlaySongTest"/>
-            <class name="HoverPlayButtonTest"/>
-            <class name="PauseSongTest"/>  -->
+            <class name="RegistrationTests"/>
         </classes>
     </test>
 </suite>
