@@ -1,8 +1,5 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
-
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
@@ -11,17 +8,18 @@ import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.interactions.Actions;
+
 
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
+
 import org.testng.annotations.*;
 
 import java.net.MalformedURLException;
 import java.net.URI;
-import java.net.URL;
+import java.net.URISyntaxException;
+
 import java.time.Duration;
 import java.util.HashMap;
 
@@ -29,7 +27,6 @@ public class BaseTest {
 
     public static WebDriver driver;
     public WebDriverWait wait;
-    public Actions actions;
 
 
     public static final ThreadLocal<WebDriver> threadDriver = new ThreadLocal<>();
@@ -39,14 +36,14 @@ public class BaseTest {
     }
     @BeforeMethod
     @Parameters({"BaseURL"})
-    public void setupBrowser(String baseURL) throws MalformedURLException {
+    public void setupBrowser(String baseURL) throws MalformedURLException, URISyntaxException {
        threadDriver.set(pickBrowser(System.getProperty("browser")));
         threadDriver.get().manage().deleteAllCookies();
         getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         getDriver().manage().window().maximize();
         getDriver().navigate().to(baseURL);
         wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
-        System.out.println("Browser setup by Thread " + Thread.currentThread().getId() + " and Driver reference is : " + getDriver());
+        //System.out.println("Browser setup by Thread " + Thread.currentThread().getId() + " and Driver reference is : " + getDriver());
     }
     //This is the method for parallel execution
 
@@ -59,7 +56,7 @@ public class BaseTest {
         //WebDriverManager.edgedriver().setup();
     }
 
-    public WebDriver pickBrowser(String browser) throws MalformedURLException {
+    public WebDriver pickBrowser(String browser) throws MalformedURLException, URISyntaxException {
         DesiredCapabilities caps = new DesiredCapabilities();
         String gridURL = "http://192.168.0.104:4444";
         switch(browser){
@@ -123,7 +120,7 @@ public class BaseTest {
         //driver.quit();
     }
 
-    public WebDriver lambdaTest() throws MalformedURLException{
+    public WebDriver lambdaTest() throws MalformedURLException, URISyntaxException {
 
         String hubURL = "https://hub.lambdatest.com/wd/hub";
         ChromeOptions browserOptions = new ChromeOptions();
@@ -139,7 +136,7 @@ public class BaseTest {
         ltOptions.put("plugin", "git-testng");
         browserOptions.setCapability("LT:Options", ltOptions);
 
-        return new RemoteWebDriver(new URL(hubURL),browserOptions);
+        return new RemoteWebDriver(new URI(hubURL).toURL(),browserOptions);
     }
 /*
     public void enterEmail(){
@@ -176,7 +173,7 @@ public class BaseTest {
         WebElement homePage = driver.findElement(By.cssSelector("[href=\"#!/home\"]"));
         homePage.click();
     }*/
-    public void launchWebsite(String baseURL){
+   /* public void launchWebsite(String baseURL){
         driver.get(baseURL);
-    }
+    }*/
 }

@@ -32,7 +32,7 @@ public class LoginTests extends BaseTest {
         loginPage.providePassword("Zqmvyk4hDaZ3vga");
         loginPage.clickLogin();
         Assert.assertTrue(loginPage.avatarFound().isDisplayed());
-        driver.close();
+        //driver.close();
     }
 
     @Test
@@ -44,7 +44,7 @@ public class LoginTests extends BaseTest {
         loginPage.clickLogin();
 
         Assert.assertTrue(loginPage.koelLogo().isDisplayed());
-        driver.close();
+        //driver.close();
     }
 
     @Test
@@ -56,7 +56,7 @@ public class LoginTests extends BaseTest {
         loginPage.clickLogin();
 
         Assert.assertTrue(loginPage.koelLogo().isDisplayed());
-        driver.close();
+        //driver.close();
     }
 
     @Test
@@ -68,7 +68,7 @@ public class LoginTests extends BaseTest {
         loginPage.clickLogin();
 
         Assert.assertTrue(loginPage.koelLogo().isDisplayed());
-        driver.close();
+        //driver.close();
     }
     @Test
     public void emptyEmailemptyPassword(){
@@ -79,7 +79,7 @@ public class LoginTests extends BaseTest {
         loginPage.clickLogin();
 
         Assert.assertTrue(loginPage.koelLogo().isDisplayed());
-        driver.close();
+        //driver.close();
     }
 
     @Test
@@ -91,7 +91,7 @@ public class LoginTests extends BaseTest {
         loginPage.clickLogin();
 
         Assert.assertTrue(loginPage.koelLogo().isDisplayed());
-        driver.close();
+        //driver.close();
     }
 
     @Test
@@ -103,7 +103,7 @@ public class LoginTests extends BaseTest {
         loginPage.clickLogin();
 
         Assert.assertTrue(loginPage.koelLogo().isDisplayed());
-        driver.close();
+        //driver.close();
     }
 
     @Test
@@ -115,7 +115,7 @@ public class LoginTests extends BaseTest {
         loginPage.clickLogin();
 
         Assert.assertTrue(loginPage.koelLogo().isDisplayed());
-        driver.close();
+        //driver.close();
     }
     @Test
     public void InvalidEmailInvalidPass(){
@@ -126,7 +126,7 @@ public class LoginTests extends BaseTest {
         loginPage.clickLogin();
 
         Assert.assertTrue(loginPage.koelLogo().isDisplayed());
-        driver.close();
+        //driver.close();
     }
 
 
