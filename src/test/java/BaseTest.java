@@ -10,6 +10,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.interactions.Actions;
 
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -30,7 +31,8 @@ public class BaseTest {
     public WebDriverWait wait;
     public Actions actions;
 
-    /*protected static final ThreadLocal<WebDriver> threadDriver = new ThreadLocal<>();
+
+    protected static final ThreadLocal<WebDriver> threadDriver = new ThreadLocal<>();
 
     public static WebDriver getDriver(){
         return threadDriver.get();
@@ -43,8 +45,10 @@ public class BaseTest {
         getDriver().manage().window().maximize();
         getDriver().navigate().to(baseURL);
         wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
+        System.out.println("Browser setup by Thread " + Thread.currentThread().getId() + " and Driver reference is : " + getDriver());
     }
-    //This is the method for parallel execution*/
+    //This is the method for parallel execution
+
 
     @BeforeSuite
     public static void setupClass() {
@@ -60,7 +64,9 @@ public class BaseTest {
         switch(browser){
             case "firefox":
                 WebDriverManager.firefoxdriver().setup();
-                return driver = new FirefoxDriver();
+                FirefoxOptions optionsFirefox = new FirefoxOptions();
+                optionsFirefox.addArguments("-private");
+                return driver = new FirefoxDriver(optionsFirefox);
             case "MicrosoftEdge":
                 WebDriverManager.edgedriver().setup();
                 EdgeOptions edgeOptions = new EdgeOptions();
@@ -84,7 +90,7 @@ public class BaseTest {
                 return driver = new ChromeDriver(chromeOptions);
         }
     }
-
+/*
     @BeforeMethod
     @Parameters({"BaseURL"})
     public void setupBasic(String baseURL) throws MalformedURLException {
@@ -101,6 +107,7 @@ public class BaseTest {
         driver.navigate().to(baseURL);
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
+    */
    /* @BeforeMethod
     public void setupPage() {
         String url = "https://qa.koel.app/";
@@ -110,16 +117,20 @@ public class BaseTest {
 
     @AfterMethod
     public void tearDown() {
-        //threadDriver.get().close();// Parallel execution
-        //threadDriver.remove();
-        driver.quit(); //This method is applicable to sequential execution
+        threadDriver.get().close();// Parallel execution
+        //threadDriver.get().quit();
+        threadDriver.remove();
+        //driver.quit();
+    }
+
+    @AfterMethod
+    public void tearDownAll(){
+        threadDriver.get().quit();
     }
 
     public WebDriver lambdaTest() throws MalformedURLException{
 
         String hubURL = "https://hub.lambdatest.com/wd/hub";
-
-        DesiredCapabilities capabilities = new DesiredCapabilities();
         ChromeOptions browserOptions = new ChromeOptions();
         browserOptions.setPlatformName("Windows 11");
         browserOptions.setBrowserVersion("121.0");
@@ -168,8 +179,8 @@ public class BaseTest {
     public void goHome(){
         WebElement homePage = driver.findElement(By.cssSelector("[href=\"#!/home\"]"));
         homePage.click();
-    }
+    }*/
     public void launchWebsite(String baseURL){
         driver.get(baseURL);
-    }*/
+    }
 }
