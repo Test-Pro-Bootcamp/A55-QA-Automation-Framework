@@ -13,6 +13,11 @@ repositories {
 
 }
 
+// Define a property 'suite' with a default value
+ext {
+    suite = "defaultSuite"
+}
+
 dependencies {
     testImplementation 'org.testng:testng:7.9.0'
     implementation 'org.seleniumhq.selenium:selenium-java:4.18.1'
