@@ -32,7 +32,7 @@ public class BaseTest {
     public Actions actions;
 
 
-    protected static final ThreadLocal<WebDriver> threadDriver = new ThreadLocal<>();
+    public static final ThreadLocal<WebDriver> threadDriver = new ThreadLocal<>();
 
     public static WebDriver getDriver(){
         return threadDriver.get();
@@ -41,7 +41,8 @@ public class BaseTest {
     @Parameters({"BaseURL"})
     public void setupBrowser(String baseURL) throws MalformedURLException {
        threadDriver.set(pickBrowser(System.getProperty("browser")));
-        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));//5 seconds or 10 seconds?
+        threadDriver.get().manage().deleteAllCookies();
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         getDriver().manage().window().maximize();
         getDriver().navigate().to(baseURL);
         wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
@@ -118,14 +119,8 @@ public class BaseTest {
     @AfterMethod
     public void tearDown() {
         threadDriver.get().close();// Parallel execution
-        //threadDriver.get().quit();
         threadDriver.remove();
         //driver.quit();
-    }
-
-    @AfterMethod
-    public void tearDownAll(){
-        threadDriver.get().quit();
     }
 
     public WebDriver lambdaTest() throws MalformedURLException{
@@ -141,6 +136,7 @@ public class BaseTest {
         ltOptions.put("project", "Selenium Grid Cloud-25");
         ltOptions.put("selenium_version", "4.17.0");
         ltOptions.put("w3c", true);
+        ltOptions.put("plugin", "git-testng");
         browserOptions.setCapability("LT:Options", ltOptions);
 
         return new RemoteWebDriver(new URL(hubURL),browserOptions);
