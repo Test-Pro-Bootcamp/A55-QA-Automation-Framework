@@ -15,7 +15,7 @@ repositories {
 
 // Define a property 'suite' with a default value
 ext {
-    suite = "defaultSuite"
+    suite = project.findProperty('suite')?:'defaultSuiteName'
 }
 
 dependencies {
@@ -29,5 +29,19 @@ test {
         suites "src/test/resources/Smoke.xml"
         //suites "src/test/resources/${suite}.xml"
         //systemProperty "browser", System.getProperty("browser")
+    }
+}
+
+task testPlaylistJenkins(type: Test) {
+    useTestNG() {
+        suites "src/test/resources/${suite}.xml"
+        systemProperty "browser", System.getProperty("browser")
+    }
+}
+
+task generateTestResults(type: Test) {
+    reports {
+        junitXml.destination(file("build/test-results/test/"))
+
     }
 }
