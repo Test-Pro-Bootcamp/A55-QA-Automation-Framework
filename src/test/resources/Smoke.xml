@@ -8,7 +8,14 @@
         <classes>
             <class name="LoginTests">
                 <methods>
-                    <include name="loginValidEmailValidPassword"/>
+                    <exclude name="invalidEmailValidPassword"/>
+                    <exclude name="validEmailInvalidPassword"/>
+                    <exclude name="emptyEmailValidPassword"/>
+                    <exclude name="emptyEmailemptyPassword"/>
+                    <exclude name="validEmailEmptyPassword"/>
+                    <exclude name="InvalidEmailEmptyPass"/>
+                    <exclude name="EmptyEmailInvalidPass"/>
+                    <exclude name="InvalidEmailInvalidPass"/>
                 </methods>
             </class>
             <class name="BaseTest"/>
