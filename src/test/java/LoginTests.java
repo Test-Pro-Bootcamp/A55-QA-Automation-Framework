@@ -21,8 +21,8 @@ public void loginWithValidCredentials(){
         LoginPage loginPage = new LoginPage(getDriver());
         HomePage homePage = new HomePage(getDriver());
 
-         loginPage.provideEmail("taqimed999@gmail.com")
-                 .providePassword("Student@1999")
+         loginPage.provideEmail("taqimed99@gmail.com")
+                 .providePassword("Med-20115-010499@")
                  .clickBtn();
          Assert.assertTrue(homePage.userAvatar().isDisplayed());
     }
@@ -31,8 +31,8 @@ public void loginWithValidCredentials(){
         LoginPage loginPage = new LoginPage(getDriver());
         HomePage homePage = new HomePage(getDriver());
 
-        loginPage.provideEmail("taqimed99@gmail.com")
-                .providePassword("Student@1999")
+        loginPage.provideEmail("taqimed999(@gmail.com")
+                .providePassword("Med-20115-010499@")
                 .clickBtn();
         Assert.assertTrue(homePage.userAvatar().isDisplayed());
     }
@@ -40,7 +40,7 @@ public void loginWithValidCredentials(){
     public void loginWithValidEmailAndInvalidPassword(){
         LoginPage loginPage = new LoginPage(getDriver());
 
-        loginPage.provideEmail("taqimed989@gmail.com")
+        loginPage.provideEmail("taqimed99@gmail.com")
                 .providePassword("Student@199")
                 .clickBtn();
         Assert.assertEquals(loginPage.loginFailedMsg(),unableToLogin);
@@ -61,12 +61,12 @@ public void loginWithValidCredentials(){
         HomePage homePage = new HomePage(getDriver());
         ProfilePage profilePage = new ProfilePage(getDriver());
 
-        loginPage.provideEmail("taqimed999@gmail.com")
-                .providePassword("Student@1999")
+        loginPage.provideEmail("taqimed99@gmail.com")
+                .providePassword("Med-20115-010499@")
                 .clickBtn();
         homePage.openProfilePage();
-        profilePage.addCurrentPassword("Student@1999");
-        profilePage.addNewEmail("taqimed99@gmail.com");
+        profilePage.addCurrentPassword("Med-20115-010499@");
+        profilePage.addNewEmail("taqimed999@gmail.com");
         //profilePage.clickSaveBtn();
         Assert.assertEquals(profilePage.emailHasUpdated(),emailUpdatedSuccessfully);
     }
@@ -75,8 +75,8 @@ public void loginWithValidCredentials(){
             LoginPage loginPage = new LoginPage(getDriver());
             HomePage homePage = new HomePage(getDriver());
 
-            loginPage.provideEmail("taqimed99@gmail.com")
-                    .providePassword("Student@1999")
+            loginPage.provideEmail("taqimed999@gmail.com")
+                    .providePassword("Med-20115-010499@")
                     .clickBtn();
             Assert.assertTrue(homePage.userAvatar().isDisplayed());
         }
@@ -85,8 +85,8 @@ public void loginWithValidCredentials(){
         LoginPage loginPage = new LoginPage(getDriver());
         HomePage homePage = new HomePage(getDriver());
 
-        loginPage.provideEmail("taqimed999@gmail.com")
-                .providePassword("Student@1999")
+        loginPage.provideEmail("taqimed99@gmail.com")
+                .providePassword("Med-20115-010499@")
                 .clickBtn();
         Assert.assertTrue(homePage.userAvatar().isDisplayed());
       }
@@ -96,12 +96,12 @@ public void loginWithValidCredentials(){
         HomePage homePage = new HomePage(getDriver());
         ProfilePage profilePage = new ProfilePage(getDriver());
 
-        loginPage.provideEmail("taqimed99@gmail.com")
-                .providePassword("Student@1999")
+        loginPage.provideEmail("taqimed999@gmail.com")
+                .providePassword("Med-20115-010499@")
                 .clickBtn();
         homePage.openProfilePage();
-        profilePage.addCurrentPassword("Student@1999");
-        profilePage.addNewPassword("Med-20115-010499@");
+        profilePage.addCurrentPassword("Med-20115-010499@");
+        profilePage.addNewPassword("Student@1999");
         //profilePage.clickSaveBtn();
         Assert.assertEquals(profilePage.passwordHasBeenUpdated(),passwordUpdatedSuccessfully);
 
@@ -111,8 +111,8 @@ public void loginWithValidCredentials(){
         LoginPage loginPage = new LoginPage(getDriver());
         HomePage homePage = new HomePage(getDriver());
 
-        loginPage.provideEmail("taqimed99@gmail.com")
-                .providePassword("Med-20115-010499@")
+        loginPage.provideEmail("taqimed999@gmail.com")
+                .providePassword("Student@1999")
                 .clickBtn();
         Assert.assertTrue(homePage.userAvatar().isDisplayed());
     }
@@ -122,7 +122,7 @@ public void loginWithValidCredentials(){
         HomePage homePage = new HomePage(getDriver());
 
         loginPage.provideEmail("taqimed999@gmail.com")
-                .providePassword("Student@1999")
+                .providePassword("Med-20115-010499@")
                 .clickBtn();
         Assert.assertTrue(homePage.userAvatar().isDisplayed());
     }

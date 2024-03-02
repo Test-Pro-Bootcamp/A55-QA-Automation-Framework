@@ -6,6 +6,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class LoginPage extends BasePage{
+    @FindBy(css ="[href='registration']")
+    private WebElement registrationButton;
     @FindBy(css = "[type='email']")
     private WebElement emailField;
 
@@ -48,6 +50,10 @@ public class LoginPage extends BasePage{
     public String loginFailedMsg(){
         wait.until(ExpectedConditions.visibilityOf(unableToLoginMsg));
         return unableToLoginMsg.getText();
+    }
+    public WebElement getRegistrationButton(){
+        wait.until(ExpectedConditions.visibilityOf(registrationButton));
+        return registrationButton;
     }
 }
 

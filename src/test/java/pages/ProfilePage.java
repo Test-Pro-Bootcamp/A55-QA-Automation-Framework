@@ -7,7 +7,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class ProfilePage extends BasePage{
-
+    @FindBy(css = "[data-testid='btn-logout']")
+    private WebElement logoutButton1;
     @FindBy(css = "[type='email']")
     private WebElement newEmailField;
     @FindBy(css = "[name='new_password']")
@@ -51,6 +52,11 @@ public class ProfilePage extends BasePage{
     public ProfilePage addCurrentPassword(String password){
         wait.until(ExpectedConditions.visibilityOf(currentPasswordField)).click();
         currentPasswordField.sendKeys(password);
+        return this;
+    }
+    public ProfilePage clickLogOut1(){
+        wait.until(ExpectedConditions.visibilityOf(logoutButton1));
+        logoutButton1.click();
         return this;
     }
 
