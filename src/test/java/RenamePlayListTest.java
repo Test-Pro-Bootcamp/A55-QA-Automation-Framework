@@ -5,7 +5,7 @@ import pages.LoginPage;
 
 import java.net.MalformedURLException;
 
-public class RenamePlayList extends BaseTest {
+public class RenamePlayListTest extends BaseTest {
 
     private LoginPage loginPage;
 
