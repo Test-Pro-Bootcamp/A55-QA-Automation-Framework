@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="TestNG">
+<suite name="TestNG" parallel="methods" thread-count="5">
+
+    <parameter name="BaseURL" value="https://qa.koel.app/"/>
+    <parameter name="Email" value="ana.nicora@testpro.io"/>
+    <parameter name="Password" value="QaKoelApp_1234"/>
+    <parameter name="PlayList" value="huraaa"/>
 
     <test name="Example Test" preserve-order="false">
         <classes>
             <class name="LoginTests"/>
-            <class name="BaseTest"/>
+            <class name="RenamePlayListTest"/>
         </classes>
     </test>
 </suite>
