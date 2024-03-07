@@ -15,7 +15,7 @@ public class PlaySongTest extends BaseTest{
         loginPage.providePassword("Zqmvyk4hDaZ3vga");
         loginPage.clickLogin();
 
-        basePage.navigateToAllSongsPage();
+        playSongPage.navigateToAllSongsPage();
 
         playSongPage.contextClickFirstSongAndPlay();
 
