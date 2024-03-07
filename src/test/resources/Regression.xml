@@ -11,6 +11,7 @@
             <class name="DeletePlaylist"/>
             <class name="PlaySongTest"/>
             <class name="HoverPlayButtonTest"/>
+            <class name="RegistrationTests"/>
         </classes>
     </test>
 </suite>
