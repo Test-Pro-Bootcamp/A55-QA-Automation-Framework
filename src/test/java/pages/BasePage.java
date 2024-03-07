@@ -51,7 +51,7 @@ public class BasePage {
     public void navigateToAllSongsPage(){
         WebElement allSong = findElement(allSongsPage);
         actions.moveToElement(allSong).build().perform();
-        findElement(allSongsPage).click();
+        actions.moveToElement(allSong).doubleClick().build().perform();
     }
     public void naviagteToHomePage(){
         WebElement homePage = findElement(naviagateToHomePage);
