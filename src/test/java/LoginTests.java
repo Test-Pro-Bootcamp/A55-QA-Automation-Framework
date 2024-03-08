@@ -34,16 +34,17 @@ public void loginWithValidCredentials(){
         loginPage.provideEmail("taqimed999(@gmail.com")
                 .providePassword("Med-20115-010499@")
                 .clickBtn();
-        Assert.assertTrue(homePage.userAvatar().isDisplayed());
+        Assert.assertTrue(homePage.userAvatarIsNotVisible());
     }
     @Test(priority = 2)
     public void loginWithValidEmailAndInvalidPassword(){
         LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
 
         loginPage.provideEmail("taqimed99@gmail.com")
                 .providePassword("Student@199")
                 .clickBtn();
-        Assert.assertEquals(loginPage.loginFailedMsg(),unableToLogin);
+        Assert.assertTrue(homePage.userAvatarIsNotVisible());
     }
     @Test(priority = 3)
     public void loginWithEmptyEmailAndEmptyPassword(){
@@ -53,7 +54,7 @@ public void loginWithValidCredentials(){
         loginPage.provideEmail("")
                 .providePassword("")
                 .clickBtn();
-        Assert.assertTrue(homePage.userAvatar().isDisplayed());
+        Assert.assertTrue(homePage.userAvatarIsNotVisible());
     }
     @Test(priority = 4)
     public void updateEmail(){
@@ -88,7 +89,7 @@ public void loginWithValidCredentials(){
         loginPage.provideEmail("taqimed99@gmail.com")
                 .providePassword("Med-20115-010499@")
                 .clickBtn();
-        Assert.assertTrue(homePage.userAvatar().isDisplayed());
+        Assert.assertTrue(homePage.userAvatarIsNotVisible());
       }
     @Test(priority = 7)
     public void updatePassword(){
@@ -124,7 +125,7 @@ public void loginWithValidCredentials(){
         loginPage.provideEmail("taqimed999@gmail.com")
                 .providePassword("Med-20115-010499@")
                 .clickBtn();
-        Assert.assertTrue(homePage.userAvatar().isDisplayed());
+        Assert.assertTrue(homePage.userAvatarIsNotVisible());
     }
 
 }

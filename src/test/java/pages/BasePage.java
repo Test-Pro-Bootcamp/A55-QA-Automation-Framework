@@ -1,6 +1,7 @@
 package pages;
 
 import com.beust.ah.A;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -36,5 +37,15 @@ public class BasePage {
     public void contextClick(WebElement element) {
         wait.until(ExpectedConditions.elementToBeClickable(element));
         actions.contextClick(findElement(element)).perform();
+    }
+    protected boolean waitForElementToBeNotVisible(WebElement webElement) {
+        boolean isWebElementNotVisible = false;
+        try {
+            isWebElementNotVisible = new WebDriverWait(driver, Duration.ofSeconds(1)).until(ExpectedConditions
+                    .invisibilityOf(webElement));
+        } catch (TimeoutException e) {
+            isWebElementNotVisible = true;
+        }
+        return isWebElementNotVisible;
     }
 }

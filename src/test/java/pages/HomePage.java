@@ -31,4 +31,8 @@ public class HomePage extends BasePage{
         logoutButton.click();
         return this;
     }
+    public boolean userAvatarIsNotVisible(){
+        return waitForElementToBeNotVisible(avatarIcon);
+
+    }
 }
