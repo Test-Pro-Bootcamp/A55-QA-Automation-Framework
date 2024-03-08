@@ -12,6 +12,7 @@
             <class name="PlaySongTest"/>
             <class name="HoverPlayButtonTest"/>
             <class name="RegistrationTests"/>
+            <class name="ChangeThemeTest"/>
         </classes>
     </test>
 </suite>

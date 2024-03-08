@@ -2,7 +2,8 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.DataProvider;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class ChangeThemePage extends BasePage{
     public ChangeThemePage(WebDriver givenDriver) {
@@ -13,22 +14,25 @@ public class ChangeThemePage extends BasePage{
 
     protected By profilePagenav = By.cssSelector("[href=\"/#!/profile\"]");
 
-    protected By currentTheme = By.xpath("//section[@id='profileWrapper']//ul[@class='themes']/li/div[@class='theme selected']/div");
 
-    public String currentThemeName;
+    public String selectedTheme;
 
-    @DataProvider(name="themeData")
-    public static Object[][] NewTheme(){
-
-        Object [][] themeChoice=new Object[15][1];
-
-        themeChoice[0][0]="";
-        themeChoice[1][0]="";
-        themeChoice[2][0]="";
-        themeChoice[3][0]="";
-        themeChoice[4][0]="";
-        return themeChoice;
+    public void navigateToProfilePg(){
+        findElement(profilePagenav).click();
     }
 
+    public void checkCurrentTheme(){
+        WebElement currentTheme = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//ul/li/div[@class='theme selected']")));
+        selectedTheme = currentTheme.getText();
+        System.out.println("The current theme is "+selectedTheme+".");
+    }
+
+    public void chooseDifferentTheme(String name, String xpath){
+        actions.moveToElement(findElement(By.xpath(xpath))).build().perform();
+        actions.scrollToElement(findElement(By.xpath(xpath))).build().perform();
+        WebElement chosenCurrentTheme = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+        chosenCurrentTheme.click();
+        checkCurrentTheme();
+    }
 
 }

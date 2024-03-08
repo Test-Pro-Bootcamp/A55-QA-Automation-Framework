@@ -12,7 +12,8 @@
             <!--<class name="DeletePlaylist"/>
             <class name="PlaySongTest"/>
             <class name="HoverPlayButtonTest"/>
-            <class name="PauseSongTest"/>  -->
+            <class name="PauseSongTest"/>
+            <class name="ChangeThemeTest"/>-->
         </classes>
     </test>
 </suite>

@@ -10,6 +10,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 
 
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -28,6 +29,8 @@ public class BaseTest {
     public static WebDriver driver;
     public WebDriverWait wait;
 
+    public Actions actions;
+
 
     public static final ThreadLocal<WebDriver> threadDriver = new ThreadLocal<>();
 
@@ -43,6 +46,7 @@ public class BaseTest {
         getDriver().manage().window().maximize();
         getDriver().navigate().to(baseURL);
         wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
+        actions = new Actions(getDriver());
         //System.out.println("Browser setup by Thread " + Thread.currentThread().getId() + " and Driver reference is : " + getDriver());
     }
     //This is the method for parallel execution
@@ -138,42 +142,16 @@ public class BaseTest {
 
         return new RemoteWebDriver(new URI(hubURL).toURL(),browserOptions);
     }
-/*
-    public void enterEmail(){
-        WebElement emailField = driver.findElement(By.cssSelector("[type=\"email\"]"));
-        emailField.sendKeys("nayana.rao.subramanya@testpro.io");
-    }
 
-    public void enterPassword(){
-        WebElement passwordField = driver.findElement(By.cssSelector("[type=\"password\"]"));
-        passwordField.sendKeys("Zqmvyk4hDaZ3vga");
-    }
+    @DataProvider(name="themeData")
+    public static Object[][] NewTheme(){
 
-    public void loginButton() throws InterruptedException {
-        WebElement logInButton = driver.findElement(By.cssSelector("[type=\"submit\"]"));
-        logInButton.click();
-        Thread.sleep(1000);
-        WebElement avatardisplayed = driver.findElement(By.cssSelector("[class=\"avatar\"]"));
-        Assert.assertTrue(avatardisplayed.isDisplayed(), "Login Unsuccessful");
-    }
+        return new Object[][] {
 
-    public void searchFieldAccess(){
-        WebElement searchField = driver.findElement(By.cssSelector("[type=\"search\"]"));
-        searchField.clear();
-        searchField.sendKeys("Tunnel of Lights (ID 1689)");
+                {"Violet", "//ul/li[2]/div"},
+                {"Classic", "//ul/li[1]/div"},
+                {"Oak", "//ul/li[3]/div"},
+                {"Slate", "//section[@id='profileWrapper']//ul[@class='themes']/li[4]/div[@class='theme']/div"}
+                };
     }
-
-    public void searchFieldAccess1(){
-        WebElement searchField = driver.findElement(By.cssSelector("[type=\"search\"]"));
-        searchField.clear();
-        searchField.sendKeys("Dee");
-    }
-
-    public void goHome(){
-        WebElement homePage = driver.findElement(By.cssSelector("[href=\"#!/home\"]"));
-        homePage.click();
-    }*/
-   /* public void launchWebsite(String baseURL){
-        driver.get(baseURL);
-    }*/
 }
