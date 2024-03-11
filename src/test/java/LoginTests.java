@@ -31,7 +31,7 @@ public void loginWithValidCredentials(){
         LoginPage loginPage = new LoginPage(getDriver());
         HomePage homePage = new HomePage(getDriver());
 
-        loginPage.provideEmail("taqimed999(@gmail.com")
+        loginPage.provideEmail("taqimed999@gmail.com")
                 .providePassword("Med-20115-010499@")
                 .clickBtn();
         Assert.assertTrue(homePage.userAvatarIsNotVisible());
