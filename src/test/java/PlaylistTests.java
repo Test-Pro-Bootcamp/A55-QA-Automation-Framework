@@ -1,20 +1,20 @@
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.BasePage;
 import pages.HomePage;
 import pages.LoginPage;
 
-public class Homework19 extends BaseTest{
+public class PlaylistTests extends BaseTest{
 
     @Test
     public void deletePlaylist() throws InterruptedException {
 
-        LoginPage loginPage = new LoginPage(driver);
-        HomePage homePage = new HomePage(driver);
+        LoginPage loginPage = new LoginPage(getThreadLocal());
+        HomePage homePage = new HomePage(getThreadLocal());
         loginPage.login();
         homePage.selectPlaylist();
         homePage.clickDeletePlaylistBtn();
+        Thread.sleep(2000);
         homePage.getPlaylistDeletedMessage();
 
        // Assert.assertEquals(getPlaylistDeletedMessage(),deletedPlaylistSuccessMessage);

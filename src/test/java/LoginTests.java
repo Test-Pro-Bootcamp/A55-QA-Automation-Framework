@@ -62,25 +62,25 @@ public class LoginTests extends BaseTest {
     //Login with Valid Email,Password using Page Object Model;
     @Test
      public void loginValidEmailValidPasswordTest() throws InterruptedException {
-        LoginPage loginPage = new LoginPage(getDriver());
-        HomePage homePage = new HomePage(getDriver());
+        LoginPage loginPage = new LoginPage(getThreadLocal());
+        HomePage homePage = new HomePage(getThreadLocal());
 
         loginPage.provideEmail("kaflimeerim@gmail.com");
         loginPage.providePassword("te$t$tudent");
         loginPage.clickSubmit();
-        Thread.sleep(2000);
+        //Thread.sleep(2000);
         Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
 
      }
     @Test
     public void loginInValidEmailValidPasswordTest() throws InterruptedException {
-        LoginPage loginPage = new LoginPage(getDriver());
-        HomePage homePage = new HomePage(getDriver());
+        LoginPage loginPage = new LoginPage(getThreadLocal());
+        HomePage homePage = new HomePage(getThreadLocal());
 
-        loginPage.provideEmail("kaflimeerimgmail.com");
+        loginPage.provideEmail("kaflimeerim@gmail.com");
         loginPage.providePassword("te$t$tudent");
         loginPage.clickSubmit();
-        Thread.sleep(2000);
+        Thread.sleep(5000);
         Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
 
     }

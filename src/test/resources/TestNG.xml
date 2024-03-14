@@ -12,11 +12,11 @@
                 <include name="loginInValidEmailValidPasswordTest"/>
             </methods>
             </class>
-            <class name="BaseTest"/>
+            <class name="PlaylistTests"/>
             <!--
             <class name="Homework16"/>
             <class name="ProfileTest"/>
-            <class name="Homework19"/>
+            <class name="PlaylistTests"/>
             <class name="AllSongsTest"/>
             <class name="HomeTest"/>
             -->
