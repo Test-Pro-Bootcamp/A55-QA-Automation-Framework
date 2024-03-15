@@ -9,8 +9,7 @@ import pages.LoginPage;
 
 import java.util.List;
 
-public class HomeTest extends BaseTest{
-
+public class HomeTest extends BaseTest {
 
 
     @Test
@@ -25,14 +24,15 @@ public class HomeTest extends BaseTest{
         //Assert.assertTrue(wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[data-testid='play-btn']"))).isDisplayed();
 
     }
-    public WebElement hoverPlay(){
+
+    public WebElement hoverPlay() {
         WebElement play = driver.findElement(By.cssSelector("[data-testid='play-btn']"));
         actions.moveToElement(play).perform();
         return wait.until(ExpectedConditions.visibilityOf(play));
     }
 
     @Test
-    public void countSongsInPlaylist(){
+    public void countSongsInPlaylist() {
         //login;
         provideEmail("kaflimeerim@gmail.com");
         providePassword("te$t$tudent");
@@ -46,15 +46,15 @@ public class HomeTest extends BaseTest{
 
     }
 
-    public String getPlaylistDetails(){
+    public String getPlaylistDetails() {
         return driver.findElement(By.cssSelector("span.meta.text-secondary span.meta")).getText();
 
     }
 
     public void displayAllSongs() {
         List<WebElement> songList = driver.findElements(By.cssSelector("section#playlistWrapper td.title"));
-        System.out.println("Number of Songs found:"+ countSongs());
-        for (WebElement e: songList){
+        System.out.println("Number of Songs found:" + countSongs());
+        for (WebElement e : songList) {
             System.out.println(e.getText());
 
         }
@@ -67,7 +67,7 @@ public class HomeTest extends BaseTest{
     }
 
     public void choosePlaylist(String playListName) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(),'"+playListName+"')]"))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(),'" + playListName + "')]"))).click();
 
     }
 
@@ -85,6 +85,20 @@ public class HomeTest extends BaseTest{
         //Assertions;
         Assert.assertEquals(homePage.getRenamePlaylistSuccessMsg(), updatedPlaylistSuccessMsg);
 
+    }
+    @Test
+    public void addSongPlayList() {
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
+
+        loginPage.login();
+        homePage.choosePlaylist();
+        homePage.clickAddToBtn();
+        homePage.selectFirstSong();
+        homePage.clickViewAllBtn();
+        //homePage.searchSong();
+        homePage.getSongAddedSuccessMessage();
+        Assert.assertTrue(homePage.getSongAddedSuccessMessage());
     }
     }
 

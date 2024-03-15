@@ -18,6 +18,7 @@ public class HomePage extends BasePage {
 
     String newPlaylistName = "Sample Playlist";
 
+
     @FindBy(xpath = "//a[contains(text(),'Oreo')]")
     WebElement playListName;
     @FindBy(xpath = "//button[@title= 'Delete this playlist']")
@@ -27,6 +28,20 @@ public class HomePage extends BasePage {
     WebElement notification;
 
     String deletedPlaylistSuccessMessage = "Deleted playlist \"Oreo.\"";
+
+    @FindBy(xpath = "//section[@id='songsWrapper']//li[contains(text(),'Green Song')]")
+    WebElement selectPlayListName;
+    @FindBy(xpath = "//button[@class='btn-add-to']")
+    WebElement addSongBtn;
+    @FindBy(xpath = "//section[@id='songsWrapper']//tr[@class='song-item'][1]")
+    WebElement clickFirstSong;
+    @FindBy(xpath = "//a[@class='songs active']")
+    WebElement viewAllSongs;
+    @FindBy(css = "div.success.show")
+    WebElement getSongAddedSuccessMessage;
+
+////section[@id='songResultsWrapper']//li[contains(text(),'Green Song')]
+
 
 
     //Helper Method;
@@ -76,4 +91,26 @@ public class HomePage extends BasePage {
         return notification.isDisplayed();
     }
 
-}
+
+    public void choosePlaylist() {
+        selectPlayListName.click();
+    }
+
+    public void clickAddToBtn() {
+        addSongBtn.click();
+    }
+
+    public void selectFirstSong() {
+        clickFirstSong.click();
+    }
+
+    public void clickViewAllBtn() {
+        viewAllSongs.click();
+    }
+    public Boolean getSongAddedSuccessMessage(){
+        WebElement  getSongAddedSuccessMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
+        return getSongAddedSuccessMessage.isDisplayed();
+
+    }
+    }
+

@@ -8,10 +8,11 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class Homework16 {
+public class RegistrationTest {
 
     @Test
     public void registrationNavigation(){
+
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
