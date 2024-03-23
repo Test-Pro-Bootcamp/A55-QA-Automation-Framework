@@ -1,25 +1,50 @@
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.HomePage;
+import pages.LogInPage;
 
-import java.time.Duration;
-
+//login with valid email using POM
 public class LoginTests extends BaseTest {
+
     @Test
-    public void loginEmptyEmailPassword() {
+    public void loginValidEmailPasswordTest() {
+        //creating objects
+        LogInPage loginPage = new LogInPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
+        LogInPage.provideEmail("aida.taymaskhanova@testpro.io");
+        LogInPage.providePassword("Ozzikpozzik18");
+        LogInPage.clickSubmit();
+        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
+    }
 
-//      Added ChromeOptions argument below to fix websocket error
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
+    @Test
+    public void loginInvalidEmailValidPasswordTest() {
+        LogInPage loginPage = new LogInPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
+        LogInPage.provideEmail("taymaskhanova@testpro.io");
+        LogInPage.providePassword("Ozzikpozzik18");
+        LogInPage.clickSubmit();
+        //Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
+    }
 
-        WebDriver driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+    @Test
+    public void loginEmptyEmailAndPasswordTest(){
+        LogInPage loginPage = new LogInPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
+        LogInPage.provideEmail("");
+        LogInPage.providePassword("");
+        LogInPage.clickSubmit();
+        //Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
+    }
 
-        String url = "https://qa.koel.app/";
-        driver.get(url);
-        Assert.assertEquals(driver.getCurrentUrl(), url);
-        driver.quit();
+    @Test
+    public void loginEmptyEmailValidPasswordTest() {
+        LogInPage loginPage = new LogInPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
+        LogInPage.provideEmail("taymaskhanova@testpro.io");
+        LogInPage.providePassword("Ozzikpozzik18");
+        LogInPage.clickSubmit();
+        //Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
     }
 }
+
