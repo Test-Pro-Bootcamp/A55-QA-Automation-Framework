@@ -9,11 +9,11 @@ import org.testng.annotations.Test;
 import java.time.Duration;
 
 public class LoginWithValidPassword extends BaseTest{
-    ChromeOptions options = new ChromeOptions();
     @Test
     public void loginValidEmailPassword(){
         // Pre-condition
         // Added ChromeOptions argument below to fix websocket error
+        ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
 
         WebDriver driver = new ChromeDriver(options);
