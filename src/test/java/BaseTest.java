@@ -6,6 +6,10 @@ public class BaseTest {
 
     @BeforeSuite
     static void setupClass() {
+
         WebDriverManager.chromedriver().setup();
+
+        String url = "https://qa.koel.app/";
+
     }
 }
