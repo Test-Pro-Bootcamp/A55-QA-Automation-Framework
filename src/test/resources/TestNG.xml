@@ -5,8 +5,7 @@
 
     <test name="Example Test" preserve-order="false">
         <classes>
-            <class name="LoginTests"/>
-            <class name="BaseTest"/>
+            <class name="apiTests.KoelTestSpec2"/>
         </classes>
     </test>
 </suite>
