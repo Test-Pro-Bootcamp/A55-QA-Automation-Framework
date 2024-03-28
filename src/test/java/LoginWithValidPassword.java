@@ -11,7 +11,7 @@ import java.time.Duration;
 public class LoginWithValidPassword extends BaseTest{
     @Test
     public void loginValidEmailPassword(){
-        
+
         // Pre-condition
         // Added ChromeOptions argument below to fix websocket error
         ChromeOptions options = new ChromeOptions();
